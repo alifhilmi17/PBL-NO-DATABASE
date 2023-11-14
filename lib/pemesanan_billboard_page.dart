@@ -16,7 +16,7 @@ class PemesananBillboardPage extends StatefulWidget {
 }
 
 class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
-  int quantity = 1;
+  int selectedPaymentOption = 1; // Default selected payment option
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,6 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
@@ -41,48 +40,59 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
               widget.catalogContent,
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 20),
-            Text(
-              'Jumlah:',
-              style: TextStyle(fontSize: 18),
+            Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pembayaran:',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    SizedBox(height: 10),
+                    buildPaymentOptionRadio(4, 'COD'),
+                    Text(
+                      'Transfer Bank:',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    buildPaymentOptionRadio(1, 'Jenis Pembayaran 1'),
+                    buildPaymentOptionRadio(2, 'Jenis Pembayaran 2'),
+                    buildPaymentOptionRadio(3, 'Jenis Pembayaran 3'),
+                  ],
+                ),
+              ),
             ),
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove),
-                  onPressed: () {
-                    setState(() {
-                      if (quantity > 1) {
-                        quantity--;
-                      }
-                    });
-                  },
-                ),
-                Text(
-                  quantity.toString(),
-                  style: TextStyle(fontSize: 18),
-                ),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() {
-                      quantity++;
-                    });
-                  },
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
+            Spacer(),
             ElevatedButton(
               onPressed: () {
-                // Do something with booking data
-                print('Billboard: ${widget.jenisBillboard}, Jumlah: $quantity');
+                // Do something with booking data and selected payment option
+                print(
+                    'Billboard: ${widget.jenisBillboard}, Pesan Sekarang, Jenis Pembayaran: $selectedPaymentOption');
               },
               child: Text('Pesan Sekarang'),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget buildPaymentOptionRadio(int value, String label) {
+    return Row(
+      children: [
+        Radio(
+          value: value,
+          groupValue: selectedPaymentOption,
+          onChanged: (int? newValue) {
+            setState(() {
+              selectedPaymentOption = newValue!;
+            });
+          },
+        ),
+        Text(label),
+      ],
     );
   }
 }
