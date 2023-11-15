@@ -144,7 +144,7 @@ class _BillboardPageState extends State<BillboardPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => PemesananBillboardPage(
-                              jenisBillboard: 'Billboard Xl',
+                              jenisBillboard: 'Billboard L',
                               catalogContent:
                                   'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                               imagePath:
@@ -227,6 +227,18 @@ class _BillboardPageState extends State<BillboardPage> {
                     right: 10,
                     child: ElevatedButton(
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PemesananBillboardPage(
+                              jenisBillboard: 'Billboard XL',
+                              catalogContent:
+                                  'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                              imagePath:
+                                  'images/gambarcatalogbillboard.png', // Add the image path here
+                            ),
+                          ),
+                        );
                         // Tindakan yang ingin Anda lakukan saat tombol ditekan
                       },
                       style: ElevatedButton.styleFrom(

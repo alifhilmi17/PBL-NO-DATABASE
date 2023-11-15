@@ -16,7 +16,7 @@ class PemesananBillboardPage extends StatefulWidget {
 }
 
 class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
-  int selectedPaymentOption = 1; // Default selected payment option
+  int selectedPaymentOption = 0; // Default selected payment option
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +51,14 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                       'Pembayaran:',
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 10),
-                    buildPaymentOptionRadio(4, 'COD'),
+                    buildPaymentOptionRadio(1, 'COD'),
                     Text(
                       'Transfer Bank:',
                       style: TextStyle(fontSize: 18),
                     ),
-                    buildPaymentOptionRadio(1, 'Jenis Pembayaran 1'),
-                    buildPaymentOptionRadio(2, 'Jenis Pembayaran 2'),
-                    buildPaymentOptionRadio(3, 'Jenis Pembayaran 3'),
+                    buildPaymentOptionRadio(2, 'Jenis Pembayaran 1'),
+                    buildPaymentOptionRadio(3, 'Jenis Pembayaran 2'),
+                    buildPaymentOptionRadio(4, 'Jenis Pembayaran 3'),
                   ],
                 ),
               ),
