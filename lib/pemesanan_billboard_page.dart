@@ -29,19 +29,42 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              widget.imagePath,
-              width: 300,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(height: 20),
-            Text(
-              widget.catalogContent,
-              style: TextStyle(fontSize: 16),
+            Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Container(
+                width: 400,
+                height: 250,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Image.asset(
+                        widget.imagePath,
+                        width: 380,
+                        height: 100, // Adjust the height of the image
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+                      child: Text(
+                        widget.catalogContent,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Card(
               elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -64,13 +87,35 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
               ),
             ),
             Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                // Do something with booking data and selected payment option
-                print(
-                    'Billboard: ${widget.jenisBillboard}, Pesan Sekarang, Jenis Pembayaran: $selectedPaymentOption');
-              },
-              child: Text('Pesan Sekarang'),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Do something with booking data and selected payment option
+                  print(
+                      'Billboard: ${widget.jenisBillboard}, Pesan Sekarang, Jenis Pembayaran: $selectedPaymentOption');
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 16), // Add horizontal padding as needed
+                  minimumSize: Size(MediaQuery.of(context).size.width,
+                      0), // Set minimum size to full width
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      'Pesan Sekarang',
+                      style: TextStyle(
+                          fontSize: 18), // Adjust the font size as needed
+                    ),
+                    Spacer(), // Add space between "Pesan Sekarang" and "Harga"
+                    Text(
+                      'Rp.200.000',
+                      style: TextStyle(
+                          fontSize: 18), // Adjust the font size as needed
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
