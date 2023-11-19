@@ -20,14 +20,14 @@ class _BannerPageState extends State<BannerPage> {
       if (index == 0) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
         ); // Tambahkan logika untuk "Home" di sini
       } else if (index == 1) {
         // Tambahkan logika untuk "Cart" di sini
       } else if (index == 2) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
         // Tambahkan logika untuk "Profile" di sini
       }
@@ -41,12 +41,12 @@ class _BannerPageState extends State<BannerPage> {
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0xFF0D0140),
           size: 30,
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () {
             Navigator.pop(context);
             MaterialPageRoute(
@@ -77,12 +77,12 @@ class _BannerPageState extends State<BannerPage> {
             child: Column(
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
-                  padding: EdgeInsets.all(10),
-                  child: Text(
+                  padding: const EdgeInsets.all(10),
+                  child: const Text(
                     'Banner',
                     style: TextStyle(
                       color: Colors.black,
@@ -91,7 +91,7 @@ class _BannerPageState extends State<BannerPage> {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   '3 - 5 Hari Pengerjaan ',
                   style: TextStyle(
                     color: Colors.black,
@@ -115,7 +115,7 @@ class _BannerPageState extends State<BannerPage> {
               ),
               child: Stack(
                 children: [
-                  Positioned(
+                  const Positioned(
                     top: 10,
                     left: 10,
                     child: Column(
@@ -141,9 +141,9 @@ class _BannerPageState extends State<BannerPage> {
                         // Tindakan yang ingin Anda lakukan saat tombol ditekan
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
+                        backgroundColor: Colors.white,
                       ),
-                      child: Text(
+                      child: const Text(
                         'Pesan',
                         style: TextStyle(
                           color: Colors.black,
@@ -163,8 +163,8 @@ class _BannerPageState extends State<BannerPage> {
                           height: 100,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(height: 10),
-                        Text(
+                        const SizedBox(height: 10),
+                        const Text(
                           'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                           style: TextStyle(
                             color: Colors.black,
@@ -191,7 +191,7 @@ class _BannerPageState extends State<BannerPage> {
               ),
               child: Stack(
                 children: [
-                  Positioned(
+                  const Positioned(
                     top: 10,
                     left: 10,
                     child: Column(
@@ -217,9 +217,9 @@ class _BannerPageState extends State<BannerPage> {
                         // Tindakan yang ingin Anda lakukan saat tombol ditekan
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
+                        backgroundColor: Colors.white,
                       ),
-                      child: Text(
+                      child: const Text(
                         'Pesan',
                         style: TextStyle(
                           color: Colors.black,
@@ -239,8 +239,8 @@ class _BannerPageState extends State<BannerPage> {
                           height: 100,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(height: 10),
-                        Text(
+                        const SizedBox(height: 10),
+                        const Text(
                           'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                           style: TextStyle(
                             color: Colors.black,
@@ -279,7 +279,7 @@ class _BannerPageState extends State<BannerPage> {
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: const Color(0xFF0D0140),
               color: const Color(0xFF0D0140),
-              tabs: [
+              tabs: const [
                 GButton(
                   icon: Icons.home,
                   text: 'Home',

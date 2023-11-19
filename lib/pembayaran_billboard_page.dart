@@ -7,7 +7,7 @@ class PaymentPage extends StatelessWidget {
   final String orderPrice;
   final String orderCode; // Kode pemesanan
 
-  PaymentPage({
+  PaymentPage({super.key, 
     required this.jenisBillboard,
     required this.selectedPaymentOption,
     required this.orderPrice,
@@ -25,7 +25,7 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Halaman Pembayaran'),
+        title: const Text('Halaman Pembayaran'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -40,19 +40,19 @@ class PaymentPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Kode Pemesanan:',
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(
                     orderCode,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
               ),
             ),
           ),
-          Text(
+          const Text(
             'Dimohon untuk menuliskan kode ini \npada keterangan transfer',
             style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
           ),
@@ -61,8 +61,8 @@ class PaymentPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
+            child: const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -84,8 +84,8 @@ class PaymentPage extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
+            child: const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -112,13 +112,13 @@ class PaymentPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Total Pembayaran:',
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(
                     orderPrice,
-                    style: TextStyle(fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
               ),

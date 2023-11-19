@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class OrderStatus {
@@ -12,15 +12,19 @@ class OrderStatus {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: OrderStatusPage(),
     );
   }
 }
 
 class OrderStatusPage extends StatefulWidget {
+  const OrderStatusPage({super.key});
+
   @override
   _OrderStatusPageState createState() => _OrderStatusPageState();
 }
@@ -36,7 +40,7 @@ class _OrderStatusPageState extends State<OrderStatusPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Status Pemesanan'),
+        title: const Text('Status Pemesanan'),
       ),
       body: ListView.builder(
         itemCount: orderStatusList.length,

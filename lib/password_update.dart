@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: ChangePasswordPage(),
     debugShowCheckedModeBanner: false,
   ));
 }
 
 class ChangePasswordPage extends StatelessWidget {
+  const ChangePasswordPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,15 +19,15 @@ class ChangePasswordPage extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_back_ios_new_rounded),
+                icon: const Icon(Icons.arrow_back_ios_new_rounded),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
             ],
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Current Password',
             style: TextStyle(
               fontSize: 16.0,
@@ -42,11 +44,11 @@ class ChangePasswordPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14.0,
                   fontFamily: 'DM Sans', // Set the font here
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelStyle: TextStyle(
                     color: Color(0xFF150B3D),
                     fontFamily: 'DM Sans', // Set the font here
@@ -57,8 +59,8 @@ class ChangePasswordPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          Text(
+          const SizedBox(height: 10),
+          const Text(
             'New Password',
             style: TextStyle(
               fontSize: 16.0,
@@ -75,11 +77,11 @@ class ChangePasswordPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14.0,
                   fontFamily: 'DM Sans', // Set the font here
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelStyle: TextStyle(
                     color: Color(0xFF150B3D),
                     fontFamily: 'DM Sans', // Set the font here
@@ -90,8 +92,8 @@ class ChangePasswordPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
-          Text(
+          const SizedBox(height: 10),
+          const Text(
             'Confirm Password',
             style: TextStyle(
               fontSize: 16.0,
@@ -108,11 +110,11 @@ class ChangePasswordPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14.0,
                   fontFamily: 'DM Sans', // Set the font here
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelStyle: TextStyle(
                     color: Color(0xFF150B3D),
                     fontFamily: 'DM Sans', // Set the font here
@@ -123,7 +125,7 @@ class ChangePasswordPage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 25),
+          const SizedBox(height: 25),
           Center(
             child: ElevatedButton(
               onPressed: () {
@@ -133,11 +135,10 @@ class ChangePasswordPage extends StatelessWidget {
                 print('Password changed successfully');
               },
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 160, vertical: 15),
-                textStyle: TextStyle(fontSize: 20),
-                primary: Color(0xFF1B424C), // Set the button color here
+                padding: const EdgeInsets.symmetric(horizontal: 160, vertical: 15), backgroundColor: const Color(0xFF1B424C),
+                textStyle: const TextStyle(fontSize: 20), // Set the button color here
               ),
-              child: Text('UPDATE',
+              child: const Text('UPDATE',
                   style: TextStyle(fontFamily: 'DM Sans')), // Set the font here
             ),
           ),

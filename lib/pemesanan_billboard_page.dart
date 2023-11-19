@@ -6,7 +6,7 @@ class PemesananBillboardPage extends StatefulWidget {
   final String catalogContent;
   final String imagePath;
 
-  PemesananBillboardPage({
+  const PemesananBillboardPage({super.key, 
     required this.jenisBillboard,
     required this.catalogContent,
     required this.imagePath,
@@ -23,7 +23,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pemesanan Billboard'),
+        title: const Text('Pemesanan Billboard'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -35,7 +35,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              child: Container(
+              child: SizedBox(
                 width: 400,
                 height: 300,
                 child: Column(
@@ -55,7 +55,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                           const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 30.0),
                       child: Text(
                         widget.catalogContent,
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
@@ -72,12 +72,12 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Pembayaran:',
                       style: TextStyle(fontSize: 18),
                     ),
                     buildPaymentOptionRadio(1, 'COD'),
-                    Text(
+                    const Text(
                       'Transfer Bank:',
                       style: TextStyle(fontSize: 18),
                     ),
@@ -88,7 +88,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: selectedPaymentOption != 0
@@ -107,13 +107,13 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   minimumSize: Size(
                     MediaQuery.of(context).size.width,
                     0,
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Text(
                       'Pesan Sekarang',

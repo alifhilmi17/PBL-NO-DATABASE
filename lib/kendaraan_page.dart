@@ -21,14 +21,14 @@ class _KendaraanPageState extends State<KendaraanPage> {
       if (index == 0) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
         ); // Add logic for "Home" here
       } else if (index == 1) {
         // Add logic for "Cart" here
       } else if (index == 2) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
         // Add logic for "Profile" here
       }
@@ -42,12 +42,12 @@ class _KendaraanPageState extends State<KendaraanPage> {
         automaticallyImplyLeading: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0xFF0D0140),
           size: 30,
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -57,7 +57,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
         child: Column(
           children: [
             // Centered image at the top
-            Container(
+            SizedBox(
               width: 130,
               height: 130,
               child: ClipOval(
@@ -71,11 +71,11 @@ class _KendaraanPageState extends State<KendaraanPage> {
             Column(
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Kendaraan',
                     style: TextStyle(
                       color: Colors.black,
@@ -84,7 +84,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   '5 - 8 Hari Pengerjaan ',
                   style: TextStyle(
                     color: Colors.black,
@@ -96,7 +96,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
             ),
 
             // Card 1
-            SizedBox(
+            const SizedBox(
               height: 16, // Adjust the spacing as needed
             ),
             Center(
@@ -109,7 +109,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 ),
                 child: Stack(
                   children: [
-                    Positioned(
+                    const Positioned(
                       top: 10,
                       left: 10,
                       child: Column(
@@ -136,7 +136,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PemesananKendaraanPage(
+                              builder: (context) => const PemesananKendaraanPage(
                                 jenisKendaraan: 'Mobil',
                                 catalogContent:
                                     'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
@@ -147,9 +147,9 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Pesan',
                           style: TextStyle(
                             color: Colors.black,
@@ -169,8 +169,8 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             height: 100,
                             fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 10),
-                          Text(
+                          const SizedBox(height: 10),
+                          const Text(
                             'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                             style: TextStyle(
                               color: Colors.black,
@@ -186,7 +186,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
             ),
 
 // Card 2
-            SizedBox(
+            const SizedBox(
               height: 16, // Adjust the spacing as needed
             ),
             Center(
@@ -199,7 +199,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 ),
                 child: Stack(
                   children: [
-                    Positioned(
+                    const Positioned(
                       top: 10,
                       left: 10,
                       child: Column(
@@ -226,7 +226,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PemesananKendaraanPage(
+                              builder: (context) => const PemesananKendaraanPage(
                                 jenisKendaraan: 'Motor',
                                 catalogContent:
                                     'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
@@ -237,9 +237,9 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Pesan',
                           style: TextStyle(
                             color: Colors.black,
@@ -259,8 +259,8 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             height: 100,
                             fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 10),
-                          Text(
+                          const SizedBox(height: 10),
+                          const Text(
                             'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                             style: TextStyle(
                               color: Colors.black,
@@ -276,7 +276,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
             ),
 
             // Card 3
-            SizedBox(
+            const SizedBox(
               height: 16, // Adjust the spacing as needed
             ),
             Center(
@@ -289,7 +289,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 ),
                 child: Stack(
                   children: [
-                    Positioned(
+                    const Positioned(
                       top: 10,
                       left: 10,
                       child: Column(
@@ -316,7 +316,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PemesananKendaraanPage(
+                              builder: (context) => const PemesananKendaraanPage(
                                 jenisKendaraan: 'Truk',
                                 catalogContent:
                                     'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
@@ -327,9 +327,9 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          backgroundColor: Colors.white,
                         ),
-                        child: Text(
+                        child: const Text(
                           'Pesan',
                           style: TextStyle(
                             color: Colors.black,
@@ -349,8 +349,8 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             height: 100,
                             fit: BoxFit.cover,
                           ),
-                          SizedBox(height: 10),
-                          Text(
+                          const SizedBox(height: 10),
+                          const Text(
                             'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                             style: TextStyle(
                               color: Colors.black,
@@ -390,7 +390,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: const Color(0xFF0D0140),
               color: const Color(0xFF0D0140),
-              tabs: [
+              tabs: const [
                 GButton(
                   icon: Icons.home,
                   text: 'Home',

@@ -3,9 +3,11 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'dashboard.dart';
 import 'profile_settings.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,23 +15,25 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: ProfilePage(),
+      home: const ProfilePage(),
     );
   }
 }
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
   int _selectedIndex = 0;
-  TextEditingController _fullNameController = TextEditingController();
-  TextEditingController _businessNameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
-  TextEditingController _locationController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _businessNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
 
   void _onItemTapped(int index) {
     setState(() {
@@ -42,7 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
       if (index == 0) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
         );
       } else if (index == 1) {
         // Add logic for "Cart" page
@@ -63,8 +67,8 @@ class _ProfilePageState extends State<ProfilePage> {
           children: <Widget>[
             Card(
               elevation: 10,
-              margin: EdgeInsets.all(0),
-              color: Color(0xFF0D0140),
+              margin: const EdgeInsets.all(0),
+              color: const Color(0xFF0D0140),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -74,13 +78,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     height: 200.0,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('images/bgprofile.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Column(
+                    child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
@@ -110,7 +114,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.settings,
                         color: Colors.white,
                       ),
@@ -118,7 +122,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProfileSettingsPage(),
+                            builder: (context) => const ProfileSettingsPage(),
                           ),
                         );
                       },
@@ -127,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             buildInfoCard('Nama Lengkap', _fullNameController, 'Nama Anda'),
             buildInfoCard(
                 'Nama Usaha', _businessNameController, 'Nama Usaha Anda'),
@@ -198,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
             padding: const EdgeInsets.only(left: 25, bottom: 8),
             child: Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
@@ -210,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Card(
             color: Colors.white,
-            margin: EdgeInsets.symmetric(vertical: 10),
+            margin: const EdgeInsets.symmetric(vertical: 10),
             child: ListTile(
               title: TextField(
                 controller: controller,
@@ -218,11 +222,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   // Do something with the changed text, if needed
                   // Example: Save to a variable or perform validation
                 },
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none, // Remove the underline
                 ),
               ),

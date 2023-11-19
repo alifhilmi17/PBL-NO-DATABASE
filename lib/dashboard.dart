@@ -51,7 +51,7 @@ class _DashboardPageState extends State<DashboardPage> {
         // Profile page
         // You can replace 'YourProfilePage()' with the actual profile page widget
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            context, MaterialPageRoute(builder: (context) => const ProfilePage()));
         break;
     }
   }
@@ -78,7 +78,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ),
         ),
-        Spacer(), // Memberikan ruang kosong di antara teks dan ikon
+        const Spacer(), // Memberikan ruang kosong di antara teks dan ikon
         IconButton(
           icon: const Icon(Icons.chat),
           iconSize: 35,
@@ -151,8 +151,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   enableInfiniteScroll: true,
                   reverse: false,
                   autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enlargeCenterPage: false,
                   scrollDirection: Axis.horizontal,

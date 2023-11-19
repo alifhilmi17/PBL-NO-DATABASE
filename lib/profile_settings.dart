@@ -3,13 +3,15 @@ import 'package:pbl/password_update.dart';
 import 'profile_page.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: ProfileSettingsPage(),
     debugShowCheckedModeBanner: false,
   ));
 }
 
 class ProfileSettingsPage extends StatefulWidget {
+  const ProfileSettingsPage({super.key});
+
   @override
   _ProfileSettingsPageState createState() => _ProfileSettingsPageState();
 }
@@ -28,20 +30,20 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back_ios_new_rounded),
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded),
                   onPressed: () {
                     Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => const ProfilePage(),
                       ),
                     );
                   },
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Bagian Notification
             Card(
               elevation: 2.0,
@@ -50,11 +52,11 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               ),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16.0),
-                leading: Icon(
+                leading: const Icon(
                   Icons.lock_outline_rounded,
                   color: Color(0xFF150B3D),
                 ),
-                title: Text(
+                title: const Text(
                   'Enable Notification',
                   style: TextStyle(
                     fontSize: 20,
@@ -74,7 +76,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               ),
             ),
 
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Bagian "Password"
             Card(
               elevation: 2.0,
@@ -83,11 +85,11 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               ),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16.0),
-                leading: Icon(
+                leading: const Icon(
                   Icons.lock_outline_rounded,
                   color: Color(0xFF150B3D),
                 ),
-                title: Text(
+                title: const Text(
                   'Password',
                   style: TextStyle(
                     fontSize: 20,
@@ -96,7 +98,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                   ),
                 ),
                 trailing: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_forward_ios_outlined,
                     color: Color(0xFF150B3D),
                   ),
@@ -104,14 +106,14 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ChangePasswordPage(),
+                        builder: (context) => const ChangePasswordPage(),
                       ),
                     );
                   },
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Bagian "Log Out"
             Card(
               elevation: 2.0,
@@ -120,11 +122,11 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               ),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16.0),
-                leading: Icon(
+                leading: const Icon(
                   Icons.logout,
                   color: Color(0xFF150B3D),
                 ),
-                title: Text(
+                title: const Text(
                   'Log Out',
                   style: TextStyle(
                     fontSize: 20,
@@ -133,7 +135,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                   ),
                 ),
                 trailing: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_forward_ios_outlined,
                     color: Color(0xFF150B3D),
                   ),
@@ -141,15 +143,15 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     showModalBottomSheet(
                       context: context,
                       isScrollControlled: true,
-                      shape: RoundedRectangleBorder(
+                      shape: const RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(50)),
                       ),
                       builder: (BuildContext context) {
                         return Container(
                           height: MediaQuery.of(context).size.height * 0.40,
-                          padding: EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius:
                                 BorderRadius.vertical(top: Radius.circular(50)),
@@ -157,8 +159,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(height: 40.0),
-                              Text(
+                              const SizedBox(height: 40.0),
+                              const Text(
                                 'LOG OUT',
                                 style: TextStyle(
                                   fontSize: 24.0,
@@ -166,8 +168,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                   color: Color(0xFF150B3D),
                                 ),
                               ),
-                              SizedBox(height: 25.0),
-                              Text(
+                              const SizedBox(height: 25.0),
+                              const Text(
                                 'Are you sure you want to leave?',
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
@@ -176,31 +178,31 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                   color: Color(0xFF150B3D),
                                 ),
                               ),
-                              SizedBox(height: 40.0),
+                              const SizedBox(height: 40.0),
                               ElevatedButton(
                                 onPressed: () {
                                   print('User clicked YES');
                                 },
                                 style: ButtonStyle(
                                   fixedSize:
-                                      MaterialStateProperty.all(Size(350, 50)),
+                                      MaterialStateProperty.all(const Size(350, 50)),
                                   backgroundColor: MaterialStateProperty.all(
-                                      Color(0xFF1B424C)),
+                                      const Color(0xFF1B424C)),
                                 ),
-                                child: Text('YES'),
+                                child: const Text('YES'),
                               ),
-                              SizedBox(height: 30.0),
+                              const SizedBox(height: 30.0),
                               ElevatedButton(
                                 onPressed: () {
                                   print('User clicked NO');
                                 },
                                 style: ButtonStyle(
                                   fixedSize:
-                                      MaterialStateProperty.all(Size(350, 50)),
+                                      MaterialStateProperty.all(const Size(350, 50)),
                                   backgroundColor:
                                       MaterialStateProperty.all(Colors.cyan),
                                 ),
-                                child: Text('NO'),
+                                child: const Text('NO'),
                               ),
                             ],
                           ),

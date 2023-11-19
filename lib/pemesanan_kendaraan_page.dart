@@ -5,7 +5,7 @@ class PemesananKendaraanPage extends StatefulWidget {
   final String catalogContent;
   final String imagePath;
 
-  PemesananKendaraanPage({
+  const PemesananKendaraanPage({super.key, 
     required this.jenisKendaraan,
     required this.catalogContent,
     required this.imagePath,
@@ -22,7 +22,7 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pemesanan Kendaraan'),
+        title: const Text('Pemesanan Kendaraan'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,20 +36,20 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
               height: 100,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               widget.catalogContent,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Jumlah:',
               style: TextStyle(fontSize: 18),
             ),
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.remove),
+                  icon: const Icon(Icons.remove),
                   onPressed: () {
                     setState(() {
                       if (quantity > 1) {
@@ -60,10 +60,10 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
                 ),
                 Text(
                   quantity.toString(),
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () {
                     setState(() {
                       quantity++;
@@ -72,14 +72,14 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Do something with booking data
                 print(
                     'Jenis Kendaraan: ${widget.jenisKendaraan}, Jumlah: $quantity');
               },
-              child: Text('Pesan Sekarang'),
+              child: const Text('Pesan Sekarang'),
             ),
           ],
         ),

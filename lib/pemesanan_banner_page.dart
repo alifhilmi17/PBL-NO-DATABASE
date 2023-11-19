@@ -10,7 +10,7 @@ class PemesananPage extends StatefulWidget {
 class _PemesananPageState extends State<PemesananPage> {
   String _selectedItem = '';
 
-  List<String> _items = [
+  final List<String> _items = [
     'Item 1',
     'Item 2',
     'Item 3',
@@ -22,7 +22,7 @@ class _PemesananPageState extends State<PemesananPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pemesanan'),
+        title: const Text('Pemesanan'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,9 +42,9 @@ class _PemesananPageState extends State<PemesananPage> {
                   child: Text(item),
                 );
               }).toList(),
-              hint: Text('Pilih Item'),
+              hint: const Text('Pilih Item'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Logika untuk menangani tombol pemesanan
@@ -56,7 +56,7 @@ class _PemesananPageState extends State<PemesananPage> {
                   print('Pilih item terlebih dahulu');
                 }
               },
-              child: Text('Pesan Sekarang'),
+              child: const Text('Pesan Sekarang'),
             ),
           ],
         ),
@@ -66,7 +66,7 @@ class _PemesananPageState extends State<PemesananPage> {
 }
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: PemesananPage(),
   ));
 }
