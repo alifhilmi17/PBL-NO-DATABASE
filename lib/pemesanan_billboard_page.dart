@@ -6,7 +6,8 @@ class PemesananBillboardPage extends StatefulWidget {
   final String catalogContent;
   final String imagePath;
 
-  const PemesananBillboardPage({super.key, 
+  const PemesananBillboardPage({
+    super.key,
     required this.jenisBillboard,
     required this.catalogContent,
     required this.imagePath,
@@ -23,7 +24,19 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pemesanan Billboard'),
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Color(0xFF0D0140),
+          size: 30,
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -107,7 +120,9 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 15), // Sesuaikan nilai sesuai kebutuhan
                   minimumSize: Size(
                     MediaQuery.of(context).size.width,
                     0,
