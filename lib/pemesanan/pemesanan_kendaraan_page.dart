@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'pembayaran_billboard_page.dart';
+import 'package:pbl/pembayaran/pembayaran_kendaraan_page.dart';
 
-class PemesananBillboardPage extends StatefulWidget {
-  final String jenisBillboard;
+class PemesananKendaraanPage extends StatefulWidget {
+  final String jenisKendaraan;
   final String catalogContent;
   final String imagePath;
 
-  const PemesananBillboardPage({
+  const PemesananKendaraanPage({
     super.key,
-    required this.jenisBillboard,
+    required this.jenisKendaraan,
     required this.catalogContent,
     required this.imagePath,
   });
 
   @override
-  _PemesananBillboardPageState createState() => _PemesananBillboardPageState();
+  _PemesananKendaraanPageState createState() => _PemesananKendaraanPageState();
 }
 
-class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
+class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
   int selectedPaymentOption = 0; // Default selected payment option
 
   @override
@@ -101,7 +101,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                 ),
               ),
             ),
-            const Spacer(),
+            Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: selectedPaymentOption != 0
@@ -111,7 +111,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => PaymentPage(
-                              jenisBillboard: widget.jenisBillboard,
+                              jenisKendaraan: widget.jenisKendaraan,
                               selectedPaymentOption: selectedPaymentOption,
                               orderPrice: 'Rp.200.000',
                             ),

@@ -67,7 +67,6 @@ class PaymentPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              color: Color(0xFF1B424C), // Warna latar belakang card
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -78,11 +77,11 @@ class PaymentPage extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          color: Colors.black),
                     ),
                     Text(
                       orderCode,
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      style: TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ],
                 ),

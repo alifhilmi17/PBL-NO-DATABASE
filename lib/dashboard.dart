@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart'; // Impor package navbar
 import 'package:carousel_slider/carousel_slider.dart'; // Impor Carousel
-import 'kendaraan_page.dart'; // Impor file kendaraan_page.dart
-import 'banner_page.dart'; // Impor file banner_page.dart
-import 'billboard_page.dart'; // Impor file banner_page.dart
+import 'catalog/kendaraan_page.dart'; // Impor file kendaraan_page.dart
+import 'catalog/banner_page.dart'; // Impor file banner_page.dart
+import 'catalog/billboard_page.dart'; // Impor file banner_page.dart
 import 'profile_page.dart'; // Impor file profile_page.dart
 
 void main() {
@@ -50,8 +50,8 @@ class _DashboardPageState extends State<DashboardPage> {
       case 2:
         // Profile page
         // You can replace 'YourProfilePage()' with the actual profile page widget
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const ProfilePage()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ProfilePage()));
         break;
     }
   }

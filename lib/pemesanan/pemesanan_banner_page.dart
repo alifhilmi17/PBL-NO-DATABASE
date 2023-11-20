@@ -1,0 +1,172 @@
+import 'package:flutter/material.dart';
+import 'package:pbl/pembayaran/pembayaran_banner_page.dart';
+
+class PemesananBannerPage extends StatefulWidget {
+  final String jenisBanner;
+  final String catalogContent;
+  final String imagePath;
+
+  const PemesananBannerPage({
+    super.key,
+    required this.jenisBanner,
+    required this.catalogContent,
+    required this.imagePath,
+  });
+
+  @override
+  _PemesananBannerPageState createState() => _PemesananBannerPageState();
+}
+
+class _PemesananBannerPageState extends State<PemesananBannerPage> {
+  int selectedPaymentOption = 0; // Default selected payment option
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Color(0xFF0D0140),
+          size: 30,
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: SizedBox(
+                width: 400,
+                height: 300,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Image.asset(
+                        widget.imagePath,
+                        width: 380,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 30.0),
+                      child: Text(
+                        widget.catalogContent,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Pembayaran:',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    buildPaymentOptionRadio(1, 'COD'),
+                    const Text(
+                      'Transfer Bank:',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    buildPaymentOptionRadio(2, 'Jenis Pembayaran 1'),
+                    buildPaymentOptionRadio(3, 'Jenis Pembayaran 2'),
+                    buildPaymentOptionRadio(4, 'Jenis Pembayaran 3'),
+                  ],
+                ),
+              ),
+            ),
+            Spacer(),
+            Center(
+              child: ElevatedButton(
+                onPressed: selectedPaymentOption != 0
+                    ? () {
+                        // Navigate to the payment page with the necessary data
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaymentPage(
+                              jenisBanner: widget.jenisBanner,
+                              selectedPaymentOption: selectedPaymentOption,
+                              orderPrice: 'Rp.200.000',
+                            ),
+                          ),
+                        );
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 15), // Sesuaikan nilai sesuai kebutuhan
+                  minimumSize: Size(
+                    MediaQuery.of(context).size.width,
+                    0,
+                  ),
+                ),
+                child: const Row(
+                  children: [
+                    Text(
+                      'Pesan Sekarang',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      'Rp.200.000',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildPaymentOptionRadio(int value, String label) {
+    return Row(
+      children: [
+        Radio(
+          value: value,
+          groupValue: selectedPaymentOption,
+          onChanged: (int? newValue) {
+            setState(() {
+              selectedPaymentOption = newValue!;
+            });
+          },
+        ),
+        Text(label),
+      ],
+    );
+  }
+}

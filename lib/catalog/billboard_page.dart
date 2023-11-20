@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pbl/profile_page.dart';
-import 'dashboard.dart';
-import 'pemesanan_kendaraan_page.dart';
+import 'package:pbl/dashboard.dart';
+import 'package:pbl/pemesanan/pemesanan_billboard_page.dart';
 
-class KendaraanPage extends StatefulWidget {
-  const KendaraanPage({Key? key}) : super(key: key);
+class BillboardPage extends StatefulWidget {
+  const BillboardPage({Key? key}) : super(key: key);
 
   @override
-  _KendaraanPageState createState() => _KendaraanPageState();
+  _BillboardPageState createState() => _BillboardPageState();
 }
 
-class _KendaraanPageState extends State<KendaraanPage> {
+class _BillboardPageState extends State<BillboardPage> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -22,15 +22,15 @@ class _KendaraanPageState extends State<KendaraanPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const DashboardPage()),
-        ); // Add logic for "Home" here
+        ); // Tambahkan logika untuk "Home" di sini
       } else if (index == 1) {
-        // Add logic for "Cart" here
+        // Tambahkan logika untuk "Cart" di sini
       } else if (index == 2) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
-        // Add logic for "Profile" here
+        // Tambahkan logika untuk "Profile" di sini
       }
     });
   }
@@ -50,33 +50,41 @@ class _KendaraanPageState extends State<KendaraanPage> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () {
             Navigator.pop(context);
+            MaterialPageRoute(
+              builder: (context) => const DashboardPage(),
+            );
+            // Fungsi Tombol Kembali
           },
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Centered image at the top
-            SizedBox(
-              width: 130,
-              height: 130,
-              child: ClipOval(
-                child: Image.asset(
-                  'images/kendaraandashboard.jpg',
-                  fit: BoxFit.cover,
-                ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          // Gambar di tengah atas
+          Positioned(
+            top: 0,
+            child: ClipOval(
+              child: Image.asset(
+                'images/billboardavatar.png',
+                width: 130,
+                height: 130,
+                fit: BoxFit.cover,
               ),
             ),
-            // Text below the image
-            Column(
+          ),
+          // Teks di bawah gambar
+          Positioned(
+            top: 130,
+            child: Column(
               children: [
                 Container(
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),
+                  padding: const EdgeInsets.all(10),
                   child: const Text(
-                    'Kendaraan',
+                    'Billboard',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 24,
@@ -85,7 +93,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                   ),
                 ),
                 const Text(
-                  '5 - 8 Hari Pengerjaan ',
+                  '3 - 5 Hari Pengerjaan ',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 24,
@@ -94,17 +102,21 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 ),
               ],
             ),
+          ),
 
-            // Card 1
-            const SizedBox(
-              height: 16, // Adjust the spacing as needed
-            ),
-            Center(
+          // Card 1
+          Positioned(
+            top: 220,
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Container(
                 width: 380,
                 height: 250,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Stack(
@@ -117,7 +129,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Mobil',
+                            'Ukuran 60cm x 190cm',
                             style: TextStyle(
                               color: Color(0xFF150A33),
                               fontWeight: FontWeight.bold,
@@ -132,27 +144,31 @@ class _KendaraanPageState extends State<KendaraanPage> {
                       right: 10,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Pass catalog content to the ordering page
+                          // Tindakan yang ingin Anda lakukan saat tombol ditekan
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const PemesananKendaraanPage(
-                                jenisKendaraan: 'Mobil',
+                              builder: (context) =>
+                                  const PemesananBillboardPage(
+                                jenisBillboard: 'Billboard L',
                                 catalogContent:
                                     'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                                 imagePath:
-                                    'images/bugatti.jpg', // Add the image path here
+                                    'images/gambarcatalogbillboard.png', // Add the image path here
                               ),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor:
+                              Colors.grey, // Warna latar belakang tombol
                         ),
                         child: const Text(
                           'Pesan',
                           style: TextStyle(
                             color: Colors.black,
+                            fontWeight:
+                                FontWeight.bold, // Warna teks dan tombol
                           ),
                         ),
                       ),
@@ -164,7 +180,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            'images/bugatti.jpg',
+                            'images/gambarcatalogbillboard.png',
                             width: 300,
                             height: 100,
                             fit: BoxFit.cover,
@@ -184,17 +200,21 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 ),
               ),
             ),
+          ),
 
-// Card 2
-            const SizedBox(
-              height: 16, // Adjust the spacing as needed
-            ),
-            Center(
+          // Card 2
+          Positioned(
+            top: 500,
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
               child: Container(
                 width: 380,
                 height: 250,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Stack(
@@ -207,7 +227,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Motor',
+                            'Ukuran 80cm x 190cm',
                             style: TextStyle(
                               color: Color(0xFF150A33),
                               fontWeight: FontWeight.bold,
@@ -222,27 +242,31 @@ class _KendaraanPageState extends State<KendaraanPage> {
                       right: 10,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Pass catalog content to the ordering page
+                          // Tindakan yang ingin Anda lakukan saat tombol ditekan
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const PemesananKendaraanPage(
-                                jenisKendaraan: 'Motor',
+                              builder: (context) =>
+                                  const PemesananBillboardPage(
+                                jenisBillboard: 'Billboard XL',
                                 catalogContent:
                                     'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
                                 imagePath:
-                                    'images/Motor.png', // Add the image path here
+                                    'images/gambarcatalogbillboard.png', // Add the image path here
                               ),
                             ),
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
+                          backgroundColor:
+                              Colors.grey, // Warna latar belakang tombol
                         ),
                         child: const Text(
                           'Pesan',
                           style: TextStyle(
                             color: Colors.black,
+                            fontWeight:
+                                FontWeight.bold, // Warna teks dan tombol
                           ),
                         ),
                       ),
@@ -254,7 +278,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            'images/motor.png',
+                            'images/gambarcatalogbillboard.png',
                             width: 300,
                             height: 100,
                             fit: BoxFit.cover,
@@ -274,98 +298,8 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 ),
               ),
             ),
-
-            // Card 3
-            const SizedBox(
-              height: 16, // Adjust the spacing as needed
-            ),
-            Center(
-              child: Container(
-                width: 380,
-                height: 250,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Stack(
-                  children: [
-                    const Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Truk',
-                            style: TextStyle(
-                              color: Color(0xFF150A33),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Pass catalog content to the ordering page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PemesananKendaraanPage(
-                                jenisKendaraan: 'Truk',
-                                catalogContent:
-                                    'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                                imagePath:
-                                    'images/truk.png', // Add the image path here
-                              ),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                        ),
-                        child: const Text(
-                          'Pesan',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 50,
-                      left: 20,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            'images/truk.png',
-                            width: 300,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
