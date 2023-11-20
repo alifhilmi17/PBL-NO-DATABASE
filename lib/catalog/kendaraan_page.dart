@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:pbl/profile_page.dart';
+import 'package:pbl/user/profile_page.dart';
 import 'package:pbl/dashboard.dart';
 import 'package:pbl/pemesanan/pemesanan_kendaraan_page.dart';
 import 'package:pbl/pemesanan/pemesanan_detail_mobil_page.dart';

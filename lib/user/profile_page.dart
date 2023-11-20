@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'dashboard.dart';
+import 'package:pbl/dashboard.dart';
 import 'profile_settings.dart';
 
 void main() => runApp(const MyApp());

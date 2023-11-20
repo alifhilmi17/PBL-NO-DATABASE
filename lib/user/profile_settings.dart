@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbl/password_update.dart';
+import 'package:pbl/user/password_update.dart';
 import 'profile_page.dart';
 
 void main() {
@@ -184,8 +184,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                   print('User clicked YES');
                                 },
                                 style: ButtonStyle(
-                                  fixedSize:
-                                      MaterialStateProperty.all(const Size(350, 50)),
+                                  fixedSize: MaterialStateProperty.all(
+                                      const Size(350, 50)),
                                   backgroundColor: MaterialStateProperty.all(
                                       const Color(0xFF1B424C)),
                                 ),
@@ -197,8 +197,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                   print('User clicked NO');
                                 },
                                 style: ButtonStyle(
-                                  fixedSize:
-                                      MaterialStateProperty.all(const Size(350, 50)),
+                                  fixedSize: MaterialStateProperty.all(
+                                      const Size(350, 50)),
                                   backgroundColor:
                                       MaterialStateProperty.all(Colors.cyan),
                                 ),

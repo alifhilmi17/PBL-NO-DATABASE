@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart'; // Impor Carousel
 import 'catalog/kendaraan_page.dart'; // Impor file kendaraan_page.dart
 import 'catalog/banner_page.dart'; // Impor file banner_page.dart
 import 'catalog/billboard_page.dart'; // Impor file banner_page.dart
-import 'profile_page.dart'; // Impor file profile_page.dart
+import 'user/profile_page.dart'; // Impor file profile_page.dart
 
 void main() {
   runApp(const MyApp());

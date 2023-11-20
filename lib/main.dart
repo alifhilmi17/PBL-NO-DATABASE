@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbl/signup.dart';
-// import 'dashboard.dart';
+import 'package:pbl/user/signup.dart';
 
 void main() {
   runApp(
