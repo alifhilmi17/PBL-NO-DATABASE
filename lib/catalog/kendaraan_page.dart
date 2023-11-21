@@ -125,7 +125,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             Text(
                               'Mobil',
                               style: TextStyle(
-                                color: Color(0xFF150A33),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
                               ),
@@ -216,7 +216,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             Text(
                               'Motor',
                               style: TextStyle(
-                                color: Color(0xFF150A33),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
                               ),
@@ -314,7 +314,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             Text(
                               'Truk',
                               style: TextStyle(
-                                color: Color(0xFF150A33),
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24,
                               ),
@@ -406,8 +406,8 @@ class _KendaraanPageState extends State<KendaraanPage> {
                 vertical: 12,
               ),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF0D0140),
-              color: const Color(0xFF0D0140),
+              tabBackgroundColor: const Color(0xFF143E47),
+              color: const Color(0xFF143E47),
               tabs: const [
                 GButton(
                   icon: Icons.home,

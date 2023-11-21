@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:pbl/cart/keranjang_page.dart';
 
 class PaymentPage extends StatelessWidget {
   final String jenisBillboard;
@@ -98,7 +99,7 @@ class PaymentPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Color(0xFF1B424C), // Warna latar belakang card
+                color: Color(0xB21B424C), // Warna latar belakang card
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -132,7 +133,7 @@ class PaymentPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Color(0xFF1B424C), // Warna latar belakang card
+                color: Color(0xB21B424C), // Warna latar belakang card
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -221,11 +222,13 @@ class PaymentPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // Tambahkan logika untuk tombol di sini
-                    // Contoh: Navigator.pushReplacementNamed(context, '/halaman_berikutnya');
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartPage()),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        Color(0xFF1B424C), // Tambahkan warna sesuai kebutuhan
+                    primary: const Color(0xFF1A424B),
                     minimumSize: Size(
                       MediaQuery.of(context).size.width,
                       0,

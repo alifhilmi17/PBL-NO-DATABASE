@@ -131,7 +131,7 @@ class _BillboardPageState extends State<BillboardPage> {
                           Text(
                             'Ukuran 60cm x 190cm',
                             style: TextStyle(
-                              color: Color(0xFF150A33),
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                             ),
@@ -229,7 +229,7 @@ class _BillboardPageState extends State<BillboardPage> {
                           Text(
                             'Ukuran 80cm x 190cm',
                             style: TextStyle(
-                              color: Color(0xFF150A33),
+                              color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 24,
                             ),
@@ -322,8 +322,8 @@ class _BillboardPageState extends State<BillboardPage> {
                 vertical: 12,
               ),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF0D0140),
-              color: const Color(0xFF0D0140),
+              tabBackgroundColor: const Color(0xFF143E47),
+              color: const Color(0xFF143E47),
               tabs: const [
                 GButton(
                   icon: Icons.home,

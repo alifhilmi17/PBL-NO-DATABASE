@@ -5,6 +5,7 @@ import 'catalog/kendaraan_page.dart'; // Impor file kendaraan_page.dart
 import 'catalog/banner_page.dart'; // Impor file banner_page.dart
 import 'catalog/billboard_page.dart'; // Impor file banner_page.dart
 import 'user/profile_page.dart'; // Impor file profile_page.dart
+import 'cart/keranjang_page.dart'; // Impor file keranjang_page.dart
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +46,8 @@ class _DashboardPageState extends State<DashboardPage> {
       case 1:
         // Cart page
         // You can replace 'YourCartPage()' with the actual cart page widget
-        // Navigator.push(context, MaterialPageRoute(builder: (context) => YourCartPage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => CartPage()));
         break;
       case 2:
         // Profile page
@@ -70,7 +72,7 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Text(
               'Hallo,', // Text Selamat Datang
               style: TextStyle(
-                color: Color(0xFF0D0140),
+                color: Colors.black,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'DM Sans', // Tambahkan font family
@@ -103,7 +105,7 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Text(
           'Username',
           style: TextStyle(
-            color: Color(0xFF0D0140),
+            color: Colors.black,
             fontSize: 24,
             fontWeight: FontWeight.bold,
             fontFamily: 'DM Sans', // Tambahkan font family
@@ -268,7 +270,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 bottom: 8,
                 left: 8,
                 child: Text(
-                  'BANNER',
+                  'Banner',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
@@ -317,7 +319,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 bottom: 8,
                 left: 8,
                 child: Text(
-                  'KENDARAAN',
+                  'Kendaraan',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
@@ -378,8 +380,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 vertical: 12,
               ),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF0D0140),
-              color: const Color(0xFF0D0140),
+              tabBackgroundColor: const Color(0xFF143E47),
+              color: const Color(0xFF143E47),
               tabs: const [
                 GButton(
                   icon: Icons.home,

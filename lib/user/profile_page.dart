@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pbl/dashboard.dart';
 import 'profile_settings.dart';
+import 'package:pbl/cart/keranjang_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -50,6 +51,10 @@ class _ProfilePageState extends State<ProfilePage> {
         );
       } else if (index == 1) {
         // Add logic for "Cart" page
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartPage()),
+        );
       } else if (index == 2) {
         // Add logic for "Profile" page
       }
@@ -68,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Card(
               elevation: 10,
               margin: const EdgeInsets.all(0),
-              color: const Color(0xFF0D0140),
+              color: const Color(0xFF143E47),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -164,8 +169,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 vertical: 12,
               ),
               duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF0D0140),
-              color: const Color(0xFF0D0140),
+              tabBackgroundColor: const Color(0xFF143E47),
+              color: const Color(0xFF143E47),
               tabs: [
                 GButton(
                   icon: Icons.home,

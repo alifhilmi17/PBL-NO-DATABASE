@@ -89,14 +89,17 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
                       'Pembayaran:',
                       style: TextStyle(fontSize: 18),
                     ),
-                    buildPaymentOptionRadio(1, 'COD'),
+                    buildPaymentOptionRadio(1, 'Pembayaran Didepan'),
+                    const SizedBox(height: 8), // Add spacing here
                     const Text(
                       'Transfer Bank:',
                       style: TextStyle(fontSize: 18),
                     ),
-                    buildPaymentOptionRadio(2, 'Jenis Pembayaran 1'),
-                    buildPaymentOptionRadio(3, 'Jenis Pembayaran 2'),
-                    buildPaymentOptionRadio(4, 'Jenis Pembayaran 3'),
+                    buildPaymentOptionRadio(2, 'Mandiri \n10900'),
+                    const SizedBox(height: 8), // Add spacing here
+                    buildPaymentOptionRadio(3, 'BTN \n140'),
+                    const SizedBox(height: 8), // Add spacing here
+                    buildPaymentOptionRadio(4, 'BNI \n21'),
                   ],
                 ),
               ),
@@ -120,6 +123,7 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF1A424B),
                   padding: const EdgeInsets.symmetric(
                       horizontal: 15,
                       vertical: 15), // Sesuaikan nilai sesuai kebutuhan

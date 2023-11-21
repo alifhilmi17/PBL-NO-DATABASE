@@ -152,7 +152,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                           height: MediaQuery.of(context).size.height * 0.40,
                           padding: const EdgeInsets.all(16.0),
                           decoration: const BoxDecoration(
-                            color: Colors.white,
+                            color: Color(0xFFC0DCDD),
                             borderRadius:
                                 BorderRadius.vertical(top: Radius.circular(50)),
                           ),
@@ -189,7 +189,14 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                   backgroundColor: MaterialStateProperty.all(
                                       const Color(0xFF1B424C)),
                                 ),
-                                child: const Text('YES'),
+                                child: const Text(
+                                  'YES',
+                                  style: TextStyle(
+                                    fontFamily: 'DM Sans',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 30.0),
                               ElevatedButton(
@@ -199,10 +206,18 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                 style: ButtonStyle(
                                   fixedSize: MaterialStateProperty.all(
                                       const Size(350, 50)),
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.cyan),
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Color(0xFFFCF7DB),
+                                  ),
                                 ),
-                                child: const Text('NO'),
+                                child: const Text(
+                                  'CANCEL',
+                                  style: TextStyle(
+                                    fontFamily: 'DM Sans',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
