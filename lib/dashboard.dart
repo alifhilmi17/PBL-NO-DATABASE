@@ -370,17 +370,13 @@ class _DashboardPageState extends State<DashboardPage> {
               vertical: 12,
             ),
             child: GNav(
-              rippleColor: Colors.black,
-              hoverColor: Colors.black,
               gap: 8,
-              activeColor: Colors.white,
+              activeColor: const Color(0xFF143E47),
               iconSize: 35,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 12,
               ),
-              duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF143E47),
               color: const Color(0xFF143E47),
               tabs: const [
                 GButton(

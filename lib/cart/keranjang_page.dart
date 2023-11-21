@@ -136,30 +136,23 @@ class _CartPageState extends State<CartPage> {
               vertical: 12,
             ),
             child: GNav(
-              rippleColor: Colors.black,
-              hoverColor: Colors.black,
               gap: 8,
-              activeColor: Colors.white,
+              activeColor: const Color(0xFF143E47),
               iconSize: 35,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 12,
               ),
-              duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF143E47),
               color: const Color(0xFF143E47),
               tabs: const [
                 GButton(
                   icon: Icons.home,
-                  text: 'Home',
                 ),
                 GButton(
                   icon: Icons.shopping_cart,
-                  text: 'Cart',
                 ),
                 GButton(
                   icon: Icons.account_circle,
-                  text: 'Profile',
                 ),
               ],
               selectedIndex: _selectedIndex,

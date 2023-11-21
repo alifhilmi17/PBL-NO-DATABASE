@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:pbl/cart/keranjang_page.dart';
 import 'package:pbl/user/profile_page.dart';
 import 'package:pbl/dashboard.dart';
 import 'package:pbl/pemesanan/pemesanan_billboard_page.dart';
@@ -24,6 +25,10 @@ class _BillboardPageState extends State<BillboardPage> {
           MaterialPageRoute(builder: (context) => const DashboardPage()),
         ); // Tambahkan logika untuk "Home" di sini
       } else if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartPage()),
+        );
         // Tambahkan logika untuk "Cart" di sini
       } else if (index == 2) {
         Navigator.push(
@@ -312,30 +317,23 @@ class _BillboardPageState extends State<BillboardPage> {
               vertical: 12,
             ),
             child: GNav(
-              rippleColor: Colors.black,
-              hoverColor: Colors.black,
               gap: 8,
-              activeColor: Colors.white,
+              activeColor: const Color(0xFF143E47),
               iconSize: 35,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 12,
               ),
-              duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF143E47),
               color: const Color(0xFF143E47),
               tabs: const [
                 GButton(
                   icon: Icons.home,
-                  text: 'Home',
                 ),
                 GButton(
                   icon: Icons.shopping_cart,
-                  text: 'Cart',
                 ),
                 GButton(
                   icon: Icons.account_circle,
-                  text: 'Profile',
                 ),
               ],
               selectedIndex: _selectedIndex,

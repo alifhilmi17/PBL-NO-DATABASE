@@ -4,6 +4,7 @@ import 'package:pbl/user/profile_page.dart';
 import 'package:pbl/dashboard.dart';
 import 'package:pbl/pemesanan/pemesanan_kendaraan_page.dart';
 import 'package:pbl/pemesanan/pemesanan_detail_mobil_page.dart';
+import 'package:pbl/cart/keranjang_page.dart';
 
 class KendaraanPage extends StatefulWidget {
   const KendaraanPage({Key? key}) : super(key: key);
@@ -25,6 +26,11 @@ class _KendaraanPageState extends State<KendaraanPage> {
           MaterialPageRoute(builder: (context) => const DashboardPage()),
         ); // Add logic for "Home" here
       } else if (index == 1) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CartPage()),
+        );
+        // Tambahkan logika untuk "Cart" di sini
         // Add logic for "Cart" here
       } else if (index == 2) {
         Navigator.push(
@@ -396,30 +402,23 @@ class _KendaraanPageState extends State<KendaraanPage> {
               vertical: 12,
             ),
             child: GNav(
-              rippleColor: Colors.black,
-              hoverColor: Colors.black,
               gap: 8,
-              activeColor: Colors.white,
+              activeColor: const Color(0xFF143E47),
               iconSize: 35,
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 12,
               ),
-              duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: const Color(0xFF143E47),
               color: const Color(0xFF143E47),
               tabs: const [
                 GButton(
                   icon: Icons.home,
-                  text: 'Home',
                 ),
                 GButton(
                   icon: Icons.shopping_cart,
-                  text: 'Cart',
                 ),
                 GButton(
                   icon: Icons.account_circle,
-                  text: 'Profile',
                 ),
               ],
               selectedIndex: _selectedIndex,
