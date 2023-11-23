@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFDCE9FA),
+      backgroundColor: const Color(0xFFC0DCDD),
       body: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 32),
@@ -223,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff130160),
+                    backgroundColor: const Color(0xFF1B424C),
                   ),
                   onPressed: () {
                     Navigator.push(
@@ -250,7 +250,7 @@ class _LoginPageState extends State<LoginPage> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 19),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xffE6E1FF),
+                    backgroundColor: const Color(0xFFFCF7DA),
                   ),
                   onPressed: () {},
                   child: Row(
