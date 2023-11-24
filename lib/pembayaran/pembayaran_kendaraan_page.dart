@@ -81,7 +81,7 @@ class PaymentPage extends StatelessWidget {
                     ),
                     Text(
                       orderCode,
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ],
                 ),
@@ -91,20 +91,20 @@ class PaymentPage extends StatelessWidget {
               'Dimohon untuk menuliskan kode ini \npada keterangan transfer',
               style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
             ),
-            Container(
+            SizedBox(
               width: 500,
               child: Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Color(0xB21B424C), // Warna latar belakang card
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                color: const Color(0xB21B424C), // Warna latar belakang card
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Pembeli:',
                         style: TextStyle(
                           fontSize: 18,
@@ -125,20 +125,20 @@ class PaymentPage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: 500,
               child: Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Color(0xB21B424C), // Warna latar belakang card
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                color: const Color(0xB21B424C), // Warna latar belakang card
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         'Penjual:',
                         style: TextStyle(
                           fontSize: 18,
@@ -179,14 +179,14 @@ class PaymentPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.access_time_outlined,
                             size: 25,
                             color: Colors.black,
                           ),
-                          const SizedBox(width: 8),
+                          SizedBox(width: 8),
                           Text(
                             'Batas waktu pembayaran 24 jam',
                             style: TextStyle(
@@ -195,15 +195,15 @@ class PaymentPage extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 15),
-                      Text(
+                      const Text(
                         'Dimohon setelah melakukan pembayaran,\ndapat menambahkan screenshoot layar untuk verifikasi',
                         style: TextStyle(fontSize: 14),
                       ),
                       const SizedBox(height: 15),
                       ElevatedButton.icon(
                         onPressed: _pickFile,
-                        icon: Icon(Icons.upload_file),
-                        label: Text('Upload File'),
+                        icon: const Icon(Icons.upload_file),
+                        label: const Text('Upload File'),
                       ),
                     ], // Implement your file upload logic here
                     // You can use packages like file_picker to facilitate file selection
@@ -211,7 +211,7 @@ class PaymentPage extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: 15, vertical: 15), // Ubah nilai sesuai kebutuhan
@@ -224,14 +224,13 @@ class PaymentPage extends StatelessWidget {
                     // Contoh: Navigator.pushReplacementNamed(context, '/halaman_berikutnya');
                   },
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        Color(0xFF1B424C), // Tambahkan warna sesuai kebutuhan
+                    backgroundColor: const Color(0xFF1B424C), // Tambahkan warna sesuai kebutuhan
                     minimumSize: Size(
                       MediaQuery.of(context).size.width,
                       0,
                     ),
                   ),
-                  child: Text('Selesai'),
+                  child: const Text('Selesai'),
                 ),
               ),
             ),

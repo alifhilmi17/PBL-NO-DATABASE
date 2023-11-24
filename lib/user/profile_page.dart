@@ -53,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // Add logic for "Cart" page
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CartPage()),
+          MaterialPageRoute(builder: (context) => const CartPage()),
         );
       } else if (index == 2) {
         // Add logic for "Profile" page

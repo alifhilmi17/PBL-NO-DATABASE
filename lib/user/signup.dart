@@ -6,7 +6,7 @@ void main() {
 }
 
 class SignUp extends StatelessWidget {
-  const SignUp({Key? key});
+  const SignUp({super.key, Key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class SignUp extends StatelessWidget {
 }
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key});
+  const SignUpPage({super.key, Key});
 
   @override
   _SignUpPageState createState() => _SignUpPageState();

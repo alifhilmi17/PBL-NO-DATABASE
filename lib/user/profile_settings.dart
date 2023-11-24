@@ -207,7 +207,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                   fixedSize: MaterialStateProperty.all(
                                       const Size(350, 50)),
                                   backgroundColor: MaterialStateProperty.all(
-                                    Color(0xFFFCF7DB),
+                                    const Color(0xFFFCF7DB),
                                   ),
                                 ),
                                 child: const Text(

@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            Text(
+            const Text(
               'Find Your',
               style: TextStyle(
                 fontFamily: 'DM Sans',
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
                 color: Color(0xff000000),
               ),
             ),
-            Text(
+            const Text(
               'Dream Advertise',
               style: TextStyle(
                 fontFamily: 'DM Sans',
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
                     TextDecoration.underline, // Add this line for underline
               ),
             ),
-            Text(
+            const Text(
               'Here!',
               style: TextStyle(
                 fontFamily: 'DM Sans',
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-            Text(
+            const Text(
               'Explore all the most exciting publicity for your product roles based on your imagination.',
               style: TextStyle(
                 fontFamily: 'DM Sans',
@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget {
             ),
           ); // Tambahkan logika ketika tombol Sign Up ditekan di sini
         },
-        backgroundColor: Color(0xFF1B424C),
+        backgroundColor: const Color(0xFF1B424C),
         child: const Icon(
           Icons.arrow_forward,
         ),

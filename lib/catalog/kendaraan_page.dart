@@ -28,7 +28,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
       } else if (index == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CartPage()),
+          MaterialPageRoute(builder: (context) => const CartPage()),
         );
         // Tambahkan logika untuk "Cart" di sini
         // Add logic for "Cart" here
@@ -148,7 +148,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailMobilPage(),
+                                builder: (context) => const DetailMobilPage(),
                               ),
                             );
                           },

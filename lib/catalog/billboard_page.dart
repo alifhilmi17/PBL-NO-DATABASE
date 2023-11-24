@@ -27,7 +27,7 @@ class _BillboardPageState extends State<BillboardPage> {
       } else if (index == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CartPage()),
+          MaterialPageRoute(builder: (context) => const CartPage()),
         );
         // Tambahkan logika untuk "Cart" di sini
       } else if (index == 2) {

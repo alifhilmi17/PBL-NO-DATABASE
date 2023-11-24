@@ -4,19 +4,23 @@ import 'package:pbl/dashboard.dart';
 import 'package:pbl/user/profile_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: CartPage(),
     );
   }
 }
 
 class CartPage extends StatefulWidget {
+  const CartPage({super.key});
+
   @override
   _CartPageState createState() => _CartPageState();
 }
@@ -40,7 +44,7 @@ class _CartPageState extends State<CartPage> {
         // Dashboard page
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
         );
         break;
       case 1:
@@ -51,7 +55,7 @@ class _CartPageState extends State<CartPage> {
         // Profile page
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfilePage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
         break;
     }
@@ -110,7 +114,7 @@ class _CartPageState extends State<CartPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -187,7 +191,7 @@ class _CartPageState extends State<CartPage> {
                 ? Colors.blue
                 : Colors.black, // Change color when pressed
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             text,
             style: TextStyle(

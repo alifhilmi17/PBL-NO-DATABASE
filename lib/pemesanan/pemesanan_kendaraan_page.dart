@@ -104,7 +104,7 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: selectedPaymentOption != 0
@@ -123,7 +123,7 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF1A424B),
+                  backgroundColor: const Color(0xFF1A424B),
                   padding: const EdgeInsets.symmetric(
                       horizontal: 15,
                       vertical: 15), // Sesuaikan nilai sesuai kebutuhan

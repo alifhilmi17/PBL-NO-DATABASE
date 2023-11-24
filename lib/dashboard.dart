@@ -12,7 +12,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, Key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  const DashboardPage({super.key, Key});
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -47,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
         // Cart page
         // You can replace 'YourCartPage()' with the actual cart page widget
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CartPage()));
+            context, MaterialPageRoute(builder: (context) => const CartPage()));
         break;
       case 2:
         // Profile page
@@ -190,18 +190,67 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget buildCardBillboard() {
     return Center(
-        child: GestureDetector(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const BillboardPage(),
+            ),
+          );
+        },
+        child: SizedBox(
+          width: 400,
+          height: 200,
+          child: Card(
+            elevation: 3,
+            color: Colors.white,
+            clipBehavior: Clip.hardEdge,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Stack(
+              children: [
+                Image.asset(
+                  'images/billboarddashboard.jpg',
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                const Positioned(
+                  bottom: 8,
+                  left: 8,
+                  child: Text(
+                    'Billboard',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'DM Sans',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCardbanner() {
+    return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const BillboardPage(),
+            builder: (context) => const BannerPage(),
           ),
         );
       },
       child: SizedBox(
-        width: 400,
-        height: 200,
+        width: 190,
+        height: 150,
         child: Card(
           elevation: 3,
           color: Colors.white,
@@ -212,58 +261,9 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Stack(
             children: [
               Image.asset(
-                'images/billboarddashboard.jpg',
-                width: 400,
-                height: 150,
-                fit: BoxFit.cover,
-              ),
-              const Positioned(
-                bottom: 8,
-                left: 8,
-                child: Text(
-                  'Billboard',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'DM Sans',
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ));
-  }
-
-  Widget buildCardbanner() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  const BannerPage()), // Navigasi ke halaman BannerPage
-        );
-      },
-      child: SizedBox(
-        width: 200,
-        height: 150,
-        child: Card(
-          elevation: 3,
-          color: Colors.white, // Atur nilai alpha untuk membuat card transparan
-          clipBehavior: Clip.hardEdge,
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(10), // Set sudut melengkung di sini
-          ),
-          child: Stack(
-            children: [
-              Image.asset(
                 'images/bannerdashboard.png',
-                width: 200,
-                height: 100,
+                width: double.infinity,
+                height: double.infinity,
                 fit: BoxFit.cover,
               ),
               const Positioned(
@@ -292,27 +292,26 @@ class _DashboardPageState extends State<DashboardPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  const KendaraanPage()), // Navigasi ke halaman KendaraanPage
+            builder: (context) => const KendaraanPage(),
+          ),
         );
       },
       child: SizedBox(
-        width: 200,
+        width: 190,
         height: 150,
         child: Card(
           elevation: 3,
-          color: Colors.white, // Atur nilai alpha untuk membuat card transparan
+          color: Colors.white,
           clipBehavior: Clip.hardEdge,
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(10), // Set sudut melengkung di sini
+            borderRadius: BorderRadius.circular(10),
           ),
           child: Stack(
             children: [
               Image.asset(
                 'images/kendaraandashboard.jpg',
-                width: 200,
-                height: 100,
+                width: double.infinity,
+                height: double.infinity,
                 fit: BoxFit.cover,
               ),
               const Positioned(
@@ -337,67 +336,69 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildWelcomeText(),
-            buildUserNameText(),
-            buildPromotionCard(),
-            buildChooseText(),
-            const SizedBox(height: 20),
-            buildCardBillboard(), // Billboard
-            const SizedBox(height: 25),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildCardbanner(), // Card Banner
-                buildCardkendaraan(), // Card Kendaraan
-              ],
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 12,
-            ),
-            child: GNav(
-              gap: 8,
-              activeColor: const Color(0xFF143E47),
-              iconSize: 35,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 12,
-              ),
-              color: const Color(0xFF143E47),
-              tabs: const [
-                GButton(
-                  icon: Icons.home,
-                  text: 'Home',
-                ),
-                GButton(
-                  icon: Icons.shopping_cart,
-                  text: 'Cart',
-                ),
-                GButton(
-                  icon: Icons.account_circle,
-                  text: 'Profile',
+                buildWelcomeText(),
+                buildUserNameText(),
+                buildPromotionCard(),
+                buildChooseText(),
+                const SizedBox(height: 20),
+                buildCardBillboard(),
+                const SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildCardbanner(),
+                    buildCardkendaraan(),
+                  ],
                 ),
               ],
-              selectedIndex: _selectedIndex,
-              onTabChange: _onItemTapped,
             ),
           ),
-        ),
-      ),
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0),
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                child: GNav(
+                  gap: 8,
+                  activeColor: const Color(0xFF143E47),
+                  iconSize: constraints.maxWidth *
+                      0.07, // Adjust icon size responsively
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 12,
+                  ),
+                  color: const Color(0xFF143E47),
+                  tabs: const [
+                    GButton(
+                      icon: Icons.home,
+                    ),
+                    GButton(
+                      icon: Icons.shopping_cart,
+                    ),
+                    GButton(
+                      icon: Icons.account_circle,
+                    ),
+                  ],
+                  selectedIndex: _selectedIndex,
+                  onTabChange: _onItemTapped,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
