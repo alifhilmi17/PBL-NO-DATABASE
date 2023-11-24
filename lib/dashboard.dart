@@ -214,7 +214,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 Image.asset(
                   'images/billboarddashboard.jpg',
                   width: double.infinity,
-                  height: double.infinity,
+                  height: 150,
                   fit: BoxFit.cover,
                 ),
                 const Positioned(
@@ -249,7 +249,7 @@ class _DashboardPageState extends State<DashboardPage> {
         );
       },
       child: SizedBox(
-        width: 190,
+        width: 210,
         height: 150,
         child: Card(
           elevation: 3,
@@ -262,8 +262,8 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               Image.asset(
                 'images/bannerdashboard.png',
-                width: double.infinity,
-                height: double.infinity,
+                width: 210,
+                height: 100,
                 fit: BoxFit.cover,
               ),
               const Positioned(
@@ -297,7 +297,7 @@ class _DashboardPageState extends State<DashboardPage> {
         );
       },
       child: SizedBox(
-        width: 190,
+        width: 210,
         height: 150,
         child: Card(
           elevation: 3,
@@ -310,8 +310,8 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               Image.asset(
                 'images/kendaraandashboard.jpg',
-                width: double.infinity,
-                height: double.infinity,
+                width: 210,
+                height: 100,
                 fit: BoxFit.cover,
               ),
               const Positioned(
