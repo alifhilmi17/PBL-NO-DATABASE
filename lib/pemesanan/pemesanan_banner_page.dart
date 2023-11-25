@@ -55,11 +55,11 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10),
                       child: Image.asset(
                         widget.imagePath,
                         width: 380,
-                        height: 120,
+                        height: 130,
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -23,19 +23,17 @@ class _BannerPageState extends State<BannerPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const DashboardPage()),
-        ); // Tambahkan logika untuk "Home" di sini
+        );
       } else if (index == 1) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const CartPage()),
         );
-        // Tambahkan logika untuk "Cart" di sini
       } else if (index == 2) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
-        // Tambahkan logika untuk "Profile" di sini
       }
     });
   }
@@ -55,257 +53,87 @@ class _BannerPageState extends State<BannerPage> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () {
             Navigator.pop(context);
-            MaterialPageRoute(
-              builder: (context) => const DashboardPage(),
-            );
-            // Fungsi Tombol Kembali
           },
         ),
       ),
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Gambar di tengah atas
-          Positioned(
-            top: 0,
-            child: ClipOval(
-              child: Image.asset(
-                'images/banneravatar.png',
-                width: 130,
-                height: 130,
-                fit: BoxFit.cover,
-              ),
+      body: Stack(alignment: Alignment.center, children: [
+        // Gambar di tengah atas
+        Positioned(
+          top: 0,
+          child: ClipOval(
+            child: Image.asset(
+              'images/bannerdashboard.png',
+              width: 130,
+              height: 130,
+              fit: BoxFit.cover,
             ),
           ),
-          // Teks di bawah gambar
-          Positioned(
-            top: 130,
-            child: Column(
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    'Banner',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'DM Sans',
-                    ),
-                  ),
+        ),
+        // Teks di bawah gambar
+        Positioned(
+          top: 130,
+          child: Column(
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.white,
                 ),
-                const Text(
-                  '3 - 5 Hari Pengerjaan ',
+                padding: const EdgeInsets.all(0),
+                child: const Text(
+                  'Banner',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'DM Sans',
                   ),
                 ),
-              ],
-            ),
+              ),
+              const Text(
+                '3 - 5 Hari Pengerjaan ',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
+        ),
 
-          // Card 1
-          Positioned(
-            top: 220,
-            child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Container(
-                width: 380,
-                height: 250,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Stack(
-                  children: [
-                    const Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ukuran 60cm x 190cm',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Tindakan yang ingin Anda lakukan saat tombol ditekan
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PemesananBannerPage(
-                                jenisBanner: 'Banner L',
-                                catalogContent:
-                                    'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                                imagePath:
-                                    'images/gambarcatalogbillboard.png', // Add the image path here
-                              ),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Colors.grey, // Warna latar belakang tombol
-                        ),
-                        child: const Text(
-                          'Pesan',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight:
-                                FontWeight.bold, // Warna teks dan tombol
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 50,
-                      left: 20,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            'images/gambarcatalogbillboard.png',
-                            width: 300,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+        SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Card 1
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 220), // Adjust as needed
+                  child: buildCard(
+                    jenisBanner: 'Banner L',
+                    catalogContent:
+                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                    imagePath: 'images/gambarcatalogbillboard.png',
+                  ),
                 ),
               ),
-            ),
-          ),
 
-          // Card 2
-          Positioned(
-            top: 500,
-            child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Container(
-                width: 380,
-                height: 250,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
+              // Card 2
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(), // Adjust as needed
+                  child: buildCard(
+                    jenisBanner: 'Banner XL',
+                    catalogContent:
+                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                    imagePath: 'images/gambarcatalogbillboard.png',
+                  ),
                 ),
-                child: Stack(
-                  children: [
-                    const Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Ukuran 80cm x 190cm',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Tindakan yang ingin Anda lakukan saat tombol ditekan
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const PemesananBannerPage(
-                                jenisBanner: 'Banner XL',
-                                catalogContent:
-                                    'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                                imagePath:
-                                    'images/gambarcatalogbillboard.png', // Add the image path here
-                              ),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Colors.grey, // Warna latar belakang tombol
-                        ),
-                        child: const Text(
-                          'Pesan',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight:
-                                FontWeight.bold, // Warna teks dan tombol
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 50,
-                      left: 20,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            'images/gambarcatalogbillboard.png',
-                            width: 300,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+              )
+            ],
           ),
-        ],
-      ),
+        ),
+      ]),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(0),
@@ -319,7 +147,8 @@ class _BannerPageState extends State<BannerPage> {
             child: GNav(
               gap: 8,
               activeColor: const Color(0xFF143E47),
-              iconSize: 35,
+              iconSize: MediaQuery.of(context).size.width *
+                  0.07, // Adjust icon size responsively
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 12,
@@ -340,6 +169,101 @@ class _BannerPageState extends State<BannerPage> {
               onTabChange: _onItemTapped,
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildCard({
+    required String jenisBanner,
+    required String catalogContent,
+    required String imagePath,
+  }) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height: 280,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    jenisBanner,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PemesananBannerPage(
+                        jenisBanner: jenisBanner,
+                        catalogContent: catalogContent,
+                        imagePath: imagePath,
+                      ),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey,
+                ),
+                child: const Text(
+                  'Pesan',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            // Adjusted position for the card content
+            Positioned(
+              top: 50,
+              left: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    imagePath,
+                    width: MediaQuery.of(context).size.width * 0.7,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    catalogContent,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

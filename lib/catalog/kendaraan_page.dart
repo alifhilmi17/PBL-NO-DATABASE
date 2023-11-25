@@ -24,26 +24,26 @@ class _KendaraanPageState extends State<KendaraanPage> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const DashboardPage()),
-        ); // Add logic for "Home" here
+        );
       } else if (index == 1) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const CartPage()),
         );
-        // Tambahkan logika untuk "Cart" di sini
-        // Add logic for "Cart" here
       } else if (index == 2) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
-        // Add logic for "Profile" here
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardWidth = screenWidth > 400 ? 380.0 : screenWidth - 20;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -108,13 +108,13 @@ class _KendaraanPageState extends State<KendaraanPage> {
             ),
             Center(
               child: Card(
-                elevation: 5, // Sesuaikan nilai elevasi sesuai keinginan Anda
+                elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
-                  width: 380,
-                  height: 250,
+                  width: cardWidth,
+                  height: 280,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -144,7 +144,6 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         right: 10,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Pass catalog content to the detail page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -172,7 +171,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           children: [
                             Image.asset(
                               'images/bugatti.jpg',
-                              width: 300,
+                              width: cardWidth - 40,
                               height: 100,
                               fit: BoxFit.cover,
                             ),
@@ -199,13 +198,13 @@ class _KendaraanPageState extends State<KendaraanPage> {
             ),
             Center(
               child: Card(
-                elevation: 5, // Sesuaikan nilai elevasi sesuai keinginan Anda
+                elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
-                  width: 380,
-                  height: 250,
+                  width: cardWidth,
+                  height: 280,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -235,7 +234,6 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         right: 10,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Pass catalog content to the ordering page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -244,8 +242,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                                   jenisKendaraan: 'Motor',
                                   catalogContent:
                                       'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                                  imagePath:
-                                      'images/motor.png', // Add the image path here
+                                  imagePath: 'images/motor.png',
                                 ),
                               ),
                             );
@@ -270,7 +267,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           children: [
                             Image.asset(
                               'images/motor.png',
-                              width: 300,
+                              width: cardWidth - 40,
                               height: 100,
                               fit: BoxFit.cover,
                             ),
@@ -297,13 +294,13 @@ class _KendaraanPageState extends State<KendaraanPage> {
             ),
             Center(
               child: Card(
-                elevation: 5, // Sesuaikan nilai elevasi sesuai keinginan Anda
+                elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
-                  width: 380,
-                  height: 250,
+                  width: cardWidth,
+                  height: 280,
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(15),
@@ -333,7 +330,6 @@ class _KendaraanPageState extends State<KendaraanPage> {
                         right: 10,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Pass catalog content to the ordering page
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -342,8 +338,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                                   jenisKendaraan: 'Truk',
                                   catalogContent:
                                       'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
-                                  imagePath:
-                                      'images/truk.png', // Add the image path here
+                                  imagePath: 'images/truk.png',
                                 ),
                               ),
                             );
@@ -368,7 +363,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                           children: [
                             Image.asset(
                               'images/truk.png',
-                              width: 300,
+                              width: cardWidth - 40,
                               height: 100,
                               fit: BoxFit.cover,
                             ),

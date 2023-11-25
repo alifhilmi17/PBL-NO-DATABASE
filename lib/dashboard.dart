@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart'; // Impor package navbar
-import 'package:carousel_slider/carousel_slider.dart'; // Impor Carousel
-import 'catalog/kendaraan_page.dart'; // Impor file kendaraan_page.dart
-import 'catalog/banner_page.dart'; // Impor file banner_page.dart
-import 'catalog/billboard_page.dart'; // Impor file banner_page.dart
-import 'user/profile_page.dart'; // Impor file profile_page.dart
-import 'cart/keranjang_page.dart'; // Impor file keranjang_page.dart
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'catalog/kendaraan_page.dart';
+import 'catalog/banner_page.dart';
+import 'catalog/billboard_page.dart';
+import 'user/profile_page.dart';
+import 'cart/keranjang_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, Key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key, Key});
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
@@ -38,54 +38,59 @@ class _DashboardPageState extends State<DashboardPage> {
       _selectedIndex = index;
     });
 
-    // Navigate to the corresponding page based on the selected index
     switch (index) {
       case 0:
         // Home page (DashboardPage in this case)
         break;
       case 1:
         // Cart page
-        // You can replace 'YourCartPage()' with the actual cart page widget
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => const CartPage()));
         break;
       case 2:
         // Profile page
-        // You can replace 'YourProfilePage()' with the actual profile page widget
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const ProfilePage()));
         break;
     }
   }
 
-  Widget buildWelcomeText() {
+  double iconSizeFromConstraints(BoxConstraints constraints) {
+    return constraints.maxWidth * 0.07;
+  }
+
+  double fontSizeFromConstraints(BoxConstraints constraints, double baseSize) {
+    return constraints.maxWidth * baseSize;
+  }
+
+  Widget buildWelcomeText(BoxConstraints constraints) {
     return Row(
       children: [
-        const Align(
+        Align(
           alignment: Alignment.topLeft,
           child: Padding(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 5.0,
               left: 8.0,
               right: 8.0,
             ),
             child: Text(
-              'Hallo,', // Text Selamat Datang
+              'Hallo,',
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 24,
+                fontSize: fontSizeFromConstraints(constraints, 0.04),
                 fontWeight: FontWeight.bold,
-                fontFamily: 'DM Sans', // Tambahkan font family
+                fontFamily: 'DM Sans',
               ),
             ),
           ),
         ),
-        const Spacer(), // Memberikan ruang kosong di antara teks dan ikon
+        const Spacer(),
         IconButton(
           icon: const Icon(Icons.chat),
-          iconSize: 35,
+          iconSize: iconSizeFromConstraints(constraints),
           onPressed: () {
-            // Tambahkan logika yang ingin Anda lakukan ketika ikon chat ditekan di sini
+            // Add logic for chat icon pressed
           },
         ),
       ],
@@ -343,7 +348,7 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildWelcomeText(),
+                buildWelcomeText(constraints),
                 buildUserNameText(),
                 buildPromotionCard(),
                 buildChooseText(),
@@ -366,18 +371,17 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 12,
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth * 0.04,
+                  vertical: constraints.maxWidth * 0.024,
                 ),
                 child: GNav(
                   gap: 8,
                   activeColor: const Color(0xFF143E47),
-                  iconSize: constraints.maxWidth *
-                      0.07, // Adjust icon size responsively
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 12,
+                  iconSize: iconSizeFromConstraints(constraints),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth * 0.04,
+                    vertical: constraints.maxWidth * 0.024,
                   ),
                   color: const Color(0xFF143E47),
                   tabs: const [
