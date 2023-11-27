@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbl/pembayaran/pembayaran_banner_page.dart';
+import 'package:pubblicita/pembayaran/pembayaran_banner_page.dart';
 
 class PemesananBannerPage extends StatefulWidget {
   final String jenisBanner;
@@ -132,7 +132,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                   0,
                 ),
               ),
-              child: Row(
+              child: const Row(
                 children: [
                   Text(
                     'Pesan Sekarang',

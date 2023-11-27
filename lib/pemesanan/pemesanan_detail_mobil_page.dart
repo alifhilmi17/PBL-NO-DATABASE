@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbl/pemesanan/pemesanan_kendaraan_page.dart';
+import 'package:pubblicita/pemesanan/pemesanan_kendaraan_page.dart';
 
 class DetailMobilPage extends StatefulWidget {
   const DetailMobilPage({Key? key}) : super(key: key);

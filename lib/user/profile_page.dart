@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:pbl/dashboard.dart';
+import 'package:pubblicita/dashboard.dart';
 import 'profile_settings.dart';
-import 'package:pbl/cart/keranjang_page.dart';
+import 'package:pubblicita/cart/keranjang_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -47,12 +47,12 @@ class _ProfilePageState extends State<ProfilePage> {
       if (index == 0) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => DashboardPage()),
+          MaterialPageRoute(builder: (context) => const DashboardPage()),
         );
       } else if (index == 1) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CartPage()),
+          MaterialPageRoute(builder: (context) => const CartPage()),
         );
       } else if (index == 2) {
         // Add logic for "Profile" page
@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 30), // Increased SizedBox height
+            const SizedBox(height: 30), // Increased SizedBox height
             Card(
               elevation: 10,
               margin: const EdgeInsets.all(0),
@@ -99,9 +99,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               radius: constraints.maxWidth < 200
                                   ? 30
                                   : 40, // Adjusted radius
-                              backgroundImage: AssetImage('images/jfgg.jpg'),
+                              backgroundImage:
+                                  const AssetImage('images/jfgg.jpg'),
                             ),
-                            SizedBox(height: 8), // Reduced spacing
+                            const SizedBox(height: 8), // Reduced spacing
                             Text(
                               'Nama Saya',
                               style: TextStyle(
@@ -112,7 +113,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(height: 4), // Reduced spacing
+                            const SizedBox(height: 4), // Reduced spacing
                             Text(
                               'Pekerjaan Saya',
                               style: TextStyle(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pbl/user/signup.dart';
-import 'package:pbl/dashboard.dart';
+import 'package:pubblicita/user/signup.dart';
+import 'package:pubblicita/dashboard.dart';
 
 void main() {
   runApp(const Login());

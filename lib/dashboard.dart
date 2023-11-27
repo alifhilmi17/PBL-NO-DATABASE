@@ -101,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return const Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             top: 5.0,
             left: 8.0,
             right: 8.0,

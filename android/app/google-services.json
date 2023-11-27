@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "19864941021",
+    "firebase_url": "https://mobile-advertising-f28e7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mobile-advertising-f28e7",
+    "storage_bucket": "mobile-advertising-f28e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19864941021:android:3552a7b63543cc60fe0634",
+        "android_client_info": {
+          "package_name": "com.example.pbl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzTSFsZDIt9EAK3U3Al7F4cfSdEcEUpm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

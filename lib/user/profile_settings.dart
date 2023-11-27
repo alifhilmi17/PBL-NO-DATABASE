@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pbl/user/password_update.dart';
+import 'package:pubblicita/user/password_update.dart';
 import 'profile_page.dart';
 
 void main() {

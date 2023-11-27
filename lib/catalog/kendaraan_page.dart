@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:pbl/user/profile_page.dart';
-import 'package:pbl/dashboard.dart';
-import 'package:pbl/pemesanan/pemesanan_kendaraan_page.dart';
-import 'package:pbl/pemesanan/pemesanan_detail_mobil_page.dart';
-import 'package:pbl/cart/keranjang_page.dart';
+import 'package:pubblicita/user/profile_page.dart';
+import 'package:pubblicita/dashboard.dart';
+import 'package:pubblicita/pemesanan/pemesanan_kendaraan_page.dart';
+import 'package:pubblicita/pemesanan/pemesanan_detail_mobil_page.dart';
+import 'package:pubblicita/cart/keranjang_page.dart';
 
 class KendaraanPage extends StatefulWidget {
   const KendaraanPage({Key? key}) : super(key: key);
