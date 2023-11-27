@@ -203,7 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 93),
+                  const SizedBox(width: 60),
                   const Text(
                     "Forgot Password ?",
                     style: TextStyle(

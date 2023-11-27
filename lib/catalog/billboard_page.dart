@@ -186,7 +186,7 @@ class _BillboardPageState extends State<BillboardPage> {
       ),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        height: 280,
+        height: 290,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15),

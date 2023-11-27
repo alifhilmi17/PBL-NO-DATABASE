@@ -19,7 +19,7 @@ class PaymentPage extends StatelessWidget {
         );
 
   static String generateOrderCode(String jenisBillboard) {
-    return 'Billboard_${jenisBillboard}_${DateFormat('yyyyMMdd_HHmmss').format(DateTime.now())}';
+    return 'BLB_${jenisBillboard}_${DateFormat('yyyyMMdd_HHmmss').format(DateTime.now())}';
   }
 
   Future<void> _pickFile() async {
@@ -203,8 +203,18 @@ class PaymentPage extends StatelessWidget {
                       const SizedBox(height: 15),
                       ElevatedButton.icon(
                         onPressed: _pickFile,
-                        icon: const Icon(Icons.upload_file),
-                        label: const Text('Upload File'),
+                        icon: Icon(
+                          Icons.upload_file,
+                          color: Color(
+                              0xFF1A424B), // Ganti dengan warna yang diinginkan
+                        ),
+                        label: Text(
+                          'Upload File',
+                          style: TextStyle(
+                            color: Color(
+                                0xFF1A424B), // Ganti dengan warna yang diinginkan
+                          ),
+                        ),
                       ),
                     ], // Implement your file upload logic here
                     // You can use packages like file_picker to facilitate file selection
@@ -215,7 +225,7 @@ class PaymentPage extends StatelessWidget {
             const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: 15, vertical: 15), // Ubah nilai sesuai kebutuhan
+                  horizontal: 10, vertical: 10), // Ubah nilai sesuai kebutuhan
               child: SizedBox(
                 width: double.infinity,
                 height: 40,
@@ -234,7 +244,12 @@ class PaymentPage extends StatelessWidget {
                       0,
                     ),
                   ),
-                  child: const Text('Selesai'),
+                  child: const Text(
+                    'Selesai',
+                    style: TextStyle(
+                      color: Colors.white, // Contoh warna hijau
+                    ),
+                  ),
                 ),
               ),
             ),

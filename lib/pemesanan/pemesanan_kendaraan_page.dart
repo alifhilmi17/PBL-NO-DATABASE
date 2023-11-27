@@ -106,51 +106,46 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
             ),
             const Spacer(),
             Center(
-              child: ElevatedButton(
-                onPressed: selectedPaymentOption != 0
-                    ? () {
-                        // Navigate to the payment page with the necessary data
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PaymentPage(
-                              jenisKendaraan: widget.jenisKendaraan,
-                              selectedPaymentOption: selectedPaymentOption,
-                              orderPrice: 'Rp.200.000',
-                            ),
+                child: ElevatedButton(
+              onPressed: selectedPaymentOption != 0
+                  ? () {
+                      // Navigate to the payment page with the necessary data
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaymentPage(
+                            jenisKendaraan: widget.jenisKendaraan,
+                            selectedPaymentOption: selectedPaymentOption,
+                            orderPrice: 'Rp.200.000',
                           ),
-                        );
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1A424B),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 15), // Sesuaikan nilai sesuai kebutuhan
-                  minimumSize: Size(
-                    MediaQuery.of(context).size.width,
-                    0,
-                  ),
-                ),
-                child: const Row(
-                  children: [
-                    Text(
-                      'Pesan Sekarang',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    Spacer(),
-                    Text(
-                      'Rp.200.000',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ],
+                        ),
+                      );
+                    }
+                  : null,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF1A424B),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 15), // Sesuaikan nilai sesuai kebutuhan
+                minimumSize: Size(
+                  MediaQuery.of(context).size.width,
+                  0,
                 ),
               ),
-            ),
+              child: Row(
+                children: [
+                  Text(
+                    'Pesan Sekarang',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  Spacer(),
+                  Text(
+                    'Rp.200.000',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ],
+              ),
+            ))
           ],
         ),
       ),

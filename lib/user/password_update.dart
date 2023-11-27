@@ -175,12 +175,17 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 160, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 130, vertical: 15),
                   backgroundColor: const Color(0xFF1B424C),
-                  textStyle: const TextStyle(fontSize: 20),
+                  textStyle: const TextStyle(fontSize: 18),
                 ),
-                child: const Text('UPDATE',
-                    style: TextStyle(fontFamily: 'DM Sans')),
+                child: const Text(
+                  'UPDATE',
+                  style: TextStyle(
+                    fontFamily: 'DM Sans',
+                    color: Colors.white, // Change this to the desired color
+                  ),
+                ),
               ),
             ),
           ],

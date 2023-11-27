@@ -141,16 +141,12 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                       children: [
                         Text(
                           'Pesan Sekarang',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                          style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                         Spacer(),
                         Text(
                           'Rp.200.000',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                          style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ],
                     ),

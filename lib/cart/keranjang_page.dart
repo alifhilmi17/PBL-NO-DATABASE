@@ -70,6 +70,7 @@ class _CartPageState extends State<CartPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            const SizedBox(height: 25),
             Card(
               elevation: 10,
               margin: const EdgeInsets.all(0),

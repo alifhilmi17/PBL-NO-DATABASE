@@ -112,6 +112,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: const Color(0xFF1B424C),
         child: const Icon(
           Icons.arrow_forward,
+          color: Colors.white,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,

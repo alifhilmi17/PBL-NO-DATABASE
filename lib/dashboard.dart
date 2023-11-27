@@ -78,7 +78,7 @@ class _DashboardPageState extends State<DashboardPage> {
               'Hallo,',
               style: TextStyle(
                 color: Colors.black,
-                fontSize: fontSizeFromConstraints(constraints, 0.04),
+                fontSize: fontSizeFromConstraints(constraints, 0.10),
                 fontWeight: FontWeight.bold,
                 fontFamily: 'DM Sans',
               ),
@@ -99,25 +99,23 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget buildUserNameText() {
     return const Align(
-      alignment: Alignment.topLeft,
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: 5.0,
-          left: 8.0,
-          right: 8.0,
-          bottom: 20.0,
-        ),
-        child: Text(
-          'Username',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'DM Sans', // Tambahkan font family
+        alignment: Alignment.topLeft,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 5.0,
+            left: 8.0,
+            right: 8.0,
           ),
-        ),
-      ),
-    );
+          child: Text(
+            'Username',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'DM Sans', // Tambahkan font family
+            ),
+          ),
+        ));
   }
 
   Widget buildPromotionCard() {
@@ -136,13 +134,13 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               CarouselSlider(
                 items: [
-                  Image.network(
+                  Image.asset(
                     'images/bugatti.jpg',
                     width: 400,
                     height: 200,
                     fit: BoxFit.fitWidth,
                   ),
-                  Image.network(
+                  Image.asset(
                     'images/promosi bni.jpg',
                     width: 400,
                     height: 200,
@@ -254,7 +252,7 @@ class _DashboardPageState extends State<DashboardPage> {
         );
       },
       child: SizedBox(
-        width: 210,
+        width: 190,
         height: 150,
         child: Card(
           elevation: 3,
@@ -267,7 +265,7 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               Image.asset(
                 'images/bannerdashboard.png',
-                width: 210,
+                width: 190,
                 height: 100,
                 fit: BoxFit.cover,
               ),
@@ -302,7 +300,7 @@ class _DashboardPageState extends State<DashboardPage> {
         );
       },
       child: SizedBox(
-        width: 210,
+        width: 190,
         height: 150,
         child: Card(
           elevation: 3,
@@ -315,7 +313,7 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               Image.asset(
                 'images/kendaraandashboard.jpg',
-                width: 210,
+                width: 190,
                 height: 100,
                 fit: BoxFit.cover,
               ),
@@ -348,13 +346,14 @@ class _DashboardPageState extends State<DashboardPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 30),
                 buildWelcomeText(constraints),
                 buildUserNameText(),
                 buildPromotionCard(),
                 buildChooseText(),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 buildCardBillboard(),
-                const SizedBox(height: 25),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
