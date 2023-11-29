@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void _updateUserName() {
     // Simulated login success. Replace this with your actual authentication logic.
     // For now, let's assume the user's name is "John Doe."
-    String loggedInUserName = "John Doe";
+    String loggedInUserName = "";
 
     setState(() {
       _userName = loggedInUserName;
@@ -110,9 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               const SizedBox(height: 8), // Reduced spacing
                               Text(
-                                _userName.isNotEmpty
-                                    ? _userName
-                                    : 'Tiyo Saputra',
+                                _userName.isNotEmpty ? _userName : '',
                                 style: TextStyle(
                                   fontSize: constraints.maxWidth < 200
                                       ? 14
