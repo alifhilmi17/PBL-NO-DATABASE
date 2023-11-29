@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pubblicita/user/signup.dart';
+import 'package:pubblicita/user/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const Awal());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Awal extends StatelessWidget {
+  const Awal({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -102,27 +106,52 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to SignUpPage
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1B424C),
+                        onPrimary: Colors.white,
+                        minimumSize: const Size(
+                            150, 50), // Set the minimum width and height
+                      ),
+                      child: const Text('Daftar'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to LoginPage
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1B424C),
+                        onPrimary: Colors.white,
+                        minimumSize: const Size(
+                            150, 50), // Set the minimum width and height
+                      ),
+                      child: const Text('Masuk'),
+                    ),
+                  ],
+                )
               ],
             ),
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SignUpPage(),
-            ),
-          );
-        },
-        backgroundColor: const Color(0xFF1B424C),
-        child: const Icon(
-          Icons.arrow_forward,
-          color: Colors.white,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

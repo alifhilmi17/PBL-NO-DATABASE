@@ -8,7 +8,7 @@ import 'user/profile_page.dart';
 import 'cart/keranjang_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const DashboardPage());
 }
 
 class MyApp extends StatelessWidget {

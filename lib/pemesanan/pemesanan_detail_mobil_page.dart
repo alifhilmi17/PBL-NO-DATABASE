@@ -18,7 +18,7 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
         elevation: 0,
         iconTheme: const IconThemeData(
           color: Color(0xFF0D0140),
-          size: 30,
+          size: 20,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),

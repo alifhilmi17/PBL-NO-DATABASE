@@ -3,10 +3,6 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:pubblicita/dashboard.dart';
 import 'package:pubblicita/user/profile_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

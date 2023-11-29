@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pubblicita/user/password_update.dart';
 import 'profile_page.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -181,7 +182,13 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                               const SizedBox(height: 40.0),
                               ElevatedButton(
                                 onPressed: () {
-                                  print('User clicked YES');
+                                  // User clicked YES, navigate back to login page
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginPage(),
+                                    ),
+                                  );
                                 },
                                 style: ButtonStyle(
                                   fixedSize: MaterialStateProperty.all(
@@ -201,7 +208,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                               const SizedBox(height: 30.0),
                               ElevatedButton(
                                 onPressed: () {
-                                  print('User clicked NO');
+                                  // User clicked CANCEL, close the bottom sheet
+                                  Navigator.pop(context);
                                 },
                                 style: ButtonStyle(
                                   fixedSize: MaterialStateProperty.all(

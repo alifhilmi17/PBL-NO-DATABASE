@@ -4,21 +4,15 @@ import 'package:pubblicita/dashboard.dart';
 import 'profile_settings.dart';
 import 'package:pubblicita/cart/keranjang_page.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const ProfilePage(),
-    );
-  }
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
+    debugShowCheckedModeBanner: false,
+    home: const ProfilePage(),
+  );
 }
 
 class ProfilePage extends StatefulWidget {
@@ -69,7 +63,7 @@ class _ProfilePageState extends State<ProfilePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const SizedBox(height: 30), // Increased SizedBox height
+            const SizedBox(height: 40), // Increased SizedBox height
             Card(
               elevation: 10,
               margin: const EdgeInsets.all(0),
@@ -148,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            const SizedBox(height: 30), // Increased SizedBox height
+            const SizedBox(height: 20), // Increased SizedBox height
             buildInfoCard('Nama Lengkap', _fullNameController, 'Nama Anda'),
             buildInfoCard(
                 'Nama Usaha', _businessNameController, 'Nama Usaha Anda'),
@@ -209,11 +203,11 @@ Widget buildInfoCard(
         alignment: Alignment.topLeft,
         child: Padding(
           padding: const EdgeInsets.only(
-              left: 25, bottom: 4), // Reduced bottom padding
+              left: 16, bottom: 4), // Adjusted left padding
           child: Text(
             title,
             style: const TextStyle(
-              fontSize: 14, // Adjusted font size
+              fontSize: 12, // Adjusted font size
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -221,11 +215,11 @@ Widget buildInfoCard(
         ),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Card(
           color: Colors.white,
           margin: const EdgeInsets.symmetric(
-              vertical: 15), // Reduced vertical margin
+              vertical: 8), // Adjusted vertical margin
           child: ListTile(
             title: TextField(
               controller: controller,
@@ -234,7 +228,7 @@ Widget buildInfoCard(
                 // Example: Save to a variable or perform validation
               },
               style: const TextStyle(
-                fontSize: 12, // Adjusted font size
+                fontSize: 10, // Adjusted font size
                 color: Colors.black,
               ),
               decoration: const InputDecoration(

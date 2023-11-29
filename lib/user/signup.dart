@@ -1,21 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pubblicita/user/login.dart';
-
-void main() {
-  runApp(const SignUp());
-}
-
-class SignUp extends StatelessWidget {
-  const SignUp({super.key, Key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SignUpPage(),
-    );
-  }
-}
+import 'package:firebase_auth/firebase_auth.dart';
+import 'login.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key, Key});
@@ -25,7 +11,11 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isPasswordVisible = false;
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +23,13 @@ class _SignUpPageState extends State<SignUpPage> {
       backgroundColor: const Color(0xFFC0DCDD),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "Create an Account",
+                "Buat Akun Anda",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'DM Sans',
@@ -47,23 +38,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               const SizedBox(
-                height: 11,
-              ),
-              const Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                style: TextStyle(
-                  fontFamily: 'DM Sans',
-                  fontSize: 12,
-                  color: Color(0xff524B6B),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 64,
+                height: 20,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const Text(
                     "Full Name",
@@ -82,9 +60,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: Colors.white,
                     ),
                     child: TextField(
+                      controller: fullNameController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Your Full Name",
+                        hintText: "Nama Lengkap Anda",
                         hintStyle: TextStyle(
                           fontFamily: 'DM Sans',
                           fontSize: 12,
@@ -113,9 +92,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: Colors.white,
                     ),
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Your Email",
+                        hintText: "Email Anda",
                         hintStyle: TextStyle(
                           fontFamily: 'DM Sans',
                           fontSize: 12,
@@ -129,7 +109,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   const SizedBox(height: 15),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const Text(
                         "Password",
@@ -148,6 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.white,
                         ),
                         child: TextField(
+                          controller: passwordController,
                           obscureText: !isPasswordVisible,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -173,43 +153,6 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: false,
-                        onChanged: (bool? value) {
-                          // Add logic you want to execute when the checkbox changes
-                        },
-                        activeColor: const Color(0xff130160),
-                        checkColor: const Color(0xFF5972A5),
-                      ),
-                      const SizedBox(width: 5),
-                      const Text(
-                        "Remember me",
-                        style: TextStyle(
-                          fontFamily: 'DM Sans',
-                          fontSize: 12,
-                          color: Color(0xFF5972A5),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 60),
-                  const Text(
-                    "Forgot Password ?",
-                    style: TextStyle(
-                      fontFamily: 'DM Sans',
-                      fontSize: 12,
-                      color: Color(0xff0D0140),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 32,
-              ),
               Container(
                 width: double.infinity,
                 height: 50,
@@ -218,16 +161,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF1B424C),
                   ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
-                      ),
-                    );
-                  },
+                  onPressed: registerUser,
                   child: const Text(
-                    "SIGN UP",
+                    "DAFTAR",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'DM Sans',
@@ -236,43 +172,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 50,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 19),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFCF7DA),
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.network(
-                        "https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png",
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      const Text(
-                        "SIGN IN WITH GOOGLE",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'DM Sans',
-                          color: Color(0xff0D0140),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "You already have an account? ",
+                    "Sudah Punya Akun? ",
                     style: TextStyle(
                       fontFamily: 'DM Sans',
                       color: Color(0xff524B6B),
@@ -303,6 +208,50 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void registerUser() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Registration successful, you can use userCredential.user to get user information
+      print('User registered: ${userCredential.user?.uid}');
+
+      // Show a toast message
+      showToast("Account created successfully");
+
+      // For this example, navigate to the login page after registration
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
+      );
+    } catch (e) {
+      // Registration failed, handle the error
+      print('Registration failed: $e');
+      showToast("Registration failed: $e");
+    }
+  }
+
+  // Helper function to show a toast message
+  void showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
+      fontSize: 16.0,
     );
   }
 }

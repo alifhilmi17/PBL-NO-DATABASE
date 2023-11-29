@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pubblicita/user/signup.dart';
 import 'package:pubblicita/dashboard.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const Login());
@@ -27,6 +29,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isPasswordVisible = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +40,12 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: const Color(0xFFC0DCDD),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Log In Your Account",
+                "Masuk Ke Akun Anda",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'DM Sans',
@@ -50,55 +56,10 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 11,
               ),
-              const Text(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-                style: TextStyle(
-                  fontFamily: 'DM Sans',
-                  fontSize: 12,
-                  color: Color(0xff524B6B),
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 64,
-              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Full Name",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'DM Sans',
-                      fontSize: 12,
-                      color: Color(0xff0D0140),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Your Full Name",
-                        hintStyle: TextStyle(
-                          fontFamily: 'DM Sans',
-                          fontSize: 12,
-                          color: const Color(0xffff0d0140).withOpacity(0.6),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 17,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
                   const Text(
                     "Email",
                     style: TextStyle(
@@ -116,9 +77,10 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                     ),
                     child: TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Your Email",
+                        hintText: "Email Anda",
                         hintStyle: TextStyle(
                           fontFamily: 'DM Sans',
                           fontSize: 12,
@@ -153,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colors.white,
                         ),
                         child: TextField(
+                          controller: passwordController,
                           obscureText: !isPasswordVisible,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -203,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                  const SizedBox(width: 60),
+                  const SizedBox(width: 80),
                   const Text(
                     "Forgot Password ?",
                     style: TextStyle(
@@ -226,12 +189,23 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: const Color(0xFF1B424C),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DashboardPage(),
-                      ),
-                    );
+                    // Check if email and password fields are not empty
+                    if (emailController.text.isEmpty ||
+                        passwordController.text.isEmpty) {
+                      // Show a toast message if any field is empty
+                      Fluttertoast.showToast(
+                        msg: "Please fill in all fields",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    } else {
+                      // Login user if fields are not empty
+                      loginUser();
+                    }
                   },
                   child: const Text(
                     "LOGIN",
@@ -243,43 +217,12 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 50,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 19),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFCF7DA),
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.network(
-                        "https://static-00.iconduck.com/assets.00/google-icon-2048x2048-czn3g8x8.png",
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        width: 12,
-                      ),
-                      const Text(
-                        "SIGN IN WITH GOOGLE",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'DM Sans',
-                          color: Color(0xff0D0140),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "You don't have an account? ",
+                    "Belum Punya Akun? ",
                     style: TextStyle(
                       fontFamily: 'DM Sans',
                       color: Color(0xff524B6B),
@@ -296,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     },
                     child: const Text(
-                      "Sign Up",
+                      "Daftar",
                       style: TextStyle(
                         fontFamily: 'DM Sans',
                         color: Color(0xffFF9228),
@@ -311,5 +254,32 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void loginUser() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Login successful, you can use userCredential.user to get user information
+      print('User logged in: ${userCredential.user?.uid}');
+
+      // For this example, navigate to the dashboard page after login
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DashboardPage(),
+        ),
+      );
+    } catch (e) {
+      // Login failed, handle the error
+      print('Login failed: $e');
+      // You can show an error message to the user if needed
+    }
   }
 }
