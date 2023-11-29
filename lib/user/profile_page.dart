@@ -4,17 +4,6 @@ import 'package:pubblicita/dashboard.dart';
 import 'profile_settings.dart';
 import 'package:pubblicita/cart/keranjang_page.dart';
 
-@override
-Widget build(BuildContext context) {
-  return MaterialApp(
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    debugShowCheckedModeBanner: false,
-    home: const ProfilePage(),
-  );
-}
-
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -29,6 +18,9 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
+
+  // Add a variable to store the user's name
+  String _userName = '';
 
   void _onItemTapped(int index) {
     setState(() {
@@ -50,142 +42,165 @@ class _ProfilePageState extends State<ProfilePage> {
         );
       } else if (index == 2) {
         // Add logic for "Profile" page
+        _updateUserName(); // Call a method to update the user's name
       }
     });
   }
 
+  // Method to update the user's name (for example, after successful login)
+  void _updateUserName() {
+    // Simulated login success. Replace this with your actual authentication logic.
+    // For now, let's assume the user's name is "John Doe."
+    String loggedInUserName = "John Doe";
+
+    setState(() {
+      _userName = loggedInUserName;
+    });
+
+    // Now you can update other UI elements, like the _fullNameController, with the user's name.
+    _fullNameController.text = _userName;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 40), // Increased SizedBox height
-            Card(
-              elevation: 10,
-              margin: const EdgeInsets.all(0),
-              color: const Color(0xFF143E47),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  Container(
-                    height: 150.0, // Adjusted height
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('images/bgprofile.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: LayoutBuilder(
-                      builder:
-                          (BuildContext context, BoxConstraints constraints) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: constraints.maxWidth < 200
-                                  ? 30
-                                  : 40, // Adjusted radius
-                              backgroundImage:
-                                  const AssetImage('images/jfgg.jpg'),
-                            ),
-                            const SizedBox(height: 8), // Reduced spacing
-                            Text(
-                              'Nama Saya',
-                              style: TextStyle(
-                                fontSize: constraints.maxWidth < 200
-                                    ? 14
-                                    : 18, // Adjusted font size
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const SizedBox(height: 4), // Reduced spacing
-                            Text(
-                              'Pekerjaan Saya',
-                              style: TextStyle(
-                                fontSize: constraints.maxWidth < 200
-                                    ? 10
-                                    : 14, // Adjusted font size
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0), // Reduced padding
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.settings,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ProfileSettingsPage(),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20), // Increased SizedBox height
-            buildInfoCard('Nama Lengkap', _fullNameController, 'Nama Anda'),
-            buildInfoCard(
-                'Nama Usaha', _businessNameController, 'Nama Usaha Anda'),
-            buildInfoCard('Email', _emailController, 'Email Anda'),
-            buildInfoCard(
-                'Nomor Telepon', _phoneNumberController, 'Nomor Telepon Anda'),
-            buildInfoCard(
-                'Lokasi Usaha', _locationController, 'Lokasi Usaha Anda'),
-          ],
-        ),
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 40), // Increased SizedBox height
+              Card(
+                elevation: 10,
+                margin: const EdgeInsets.all(0),
+                color: const Color(0xFF143E47),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    Container(
+                      height: 150.0, // Adjusted height
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('images/bgprofile.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: LayoutBuilder(
+                        builder:
+                            (BuildContext context, BoxConstraints constraints) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: constraints.maxWidth < 200
+                                    ? 30
+                                    : 40, // Adjusted radius
+                                backgroundImage:
+                                    const AssetImage('images/jfgg.jpg'),
+                              ),
+                              const SizedBox(height: 8), // Reduced spacing
+                              Text(
+                                _userName.isNotEmpty
+                                    ? _userName
+                                    : 'Tiyo Saputra',
+                                style: TextStyle(
+                                  fontSize: constraints.maxWidth < 200
+                                      ? 14
+                                      : 18, // Adjusted font size
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const SizedBox(height: 4), // Reduced spacing
+                              Text(
+                                'Pekerjaan Saya',
+                                style: TextStyle(
+                                  fontSize: constraints.maxWidth < 200
+                                      ? 10
+                                      : 14, // Adjusted font size
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0), // Reduced padding
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.settings,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfileSettingsPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20), // Increased SizedBox height
+              buildInfoCard('Nama Lengkap', _fullNameController, 'Nama Anda'),
+              buildInfoCard(
+                  'Nama Usaha', _businessNameController, 'Nama Usaha Anda'),
+              buildInfoCard('Email', _emailController, 'Email Anda'),
+              buildInfoCard('Nomor Telepon', _phoneNumberController,
+                  'Nomor Telepon Anda'),
+              buildInfoCard(
+                  'Lokasi Usaha', _locationController, 'Lokasi Usaha Anda'),
+            ],
+          ),
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 12,
-            ),
-            child: GNav(
-              gap: 8,
-              activeColor: const Color(0xFF143E47),
-              iconSize: 30,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0),
+          ),
+          child: SafeArea(
+            child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 12,
               ),
-              color: const Color(0xFF143E47),
-              tabs: const [
-                GButton(
-                  icon: Icons.home,
+              child: GNav(
+                gap: 8,
+                activeColor: const Color(0xFF143E47),
+                iconSize: 30,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
                 ),
-                GButton(
-                  icon: Icons.shopping_cart,
-                ),
-                GButton(
-                  icon: Icons.account_circle,
-                ),
-              ],
-              selectedIndex: _selectedIndex,
-              onTabChange: _onItemTapped,
+                color: const Color(0xFF143E47),
+                tabs: const [
+                  GButton(
+                    icon: Icons.home,
+                  ),
+                  GButton(
+                    icon: Icons.shopping_cart,
+                  ),
+                  GButton(
+                    icon: Icons.account_circle,
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                onTabChange: _onItemTapped,
+              ),
             ),
           ),
         ),
