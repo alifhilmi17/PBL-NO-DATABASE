@@ -280,7 +280,7 @@ class _LoginPageState extends State<LoginPage> {
       // Display a toast message for successful login
       Fluttertoast.showToast(
         msg: "Login Berhasil",
-        toastLength: Toast.LENGTH_SHORT,
+        toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.green,
@@ -291,6 +291,17 @@ class _LoginPageState extends State<LoginPage> {
       // Login failed, handle the error
       print('Login failed: $e');
       // You can show an error message to the user if needed
+
+// Tampilkan pesan toast untuk kesalahan login
+      Fluttertoast.showToast(
+        msg: "Login Gagal. Periksa kembali email dan password Anda",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 }

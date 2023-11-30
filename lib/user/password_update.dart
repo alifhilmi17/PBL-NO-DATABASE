@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
-  runApp(const MaterialApp(
-    home: ChangePasswordPage(),
-    debugShowCheckedModeBanner: false,
-  ));
+  runApp(
+    const MaterialApp(
+      home: ChangePasswordPage(),
+      debugShowCheckedModeBanner: false,
+    ),
+  );
 }
 
 class ChangePasswordPage extends StatefulWidget {
@@ -16,6 +20,9 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   bool isPasswordVisible = false;
+  TextEditingController currentPasswordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +60,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: currentPasswordController,
                   style: const TextStyle(
                     fontSize: 14.0,
                     fontFamily: 'DM Sans',
@@ -96,6 +104,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: newPasswordController,
                   style: const TextStyle(
                     fontSize: 14.0,
                     fontFamily: 'DM Sans',
@@ -139,6 +148,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: confirmPasswordController,
                   style: const TextStyle(
                     fontSize: 14.0,
                     fontFamily: 'DM Sans',
@@ -168,10 +178,18 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Add logic to change password
-                  // You may want to implement authentication checks and connect to a backend service
-                  // For simplicity, we are just printing the new password here
-                  print('Password changed successfully');
+                  // String currentPassword = currentPasswordController.text;
+                  String newPassword = newPasswordController.text;
+                  String confirmPassword = confirmPasswordController.text;
+
+                  // Check if new password and confirm password match
+                  if (newPassword == confirmPassword) {
+                    // Call the function to change the password
+                    changePassword(newPassword);
+                  } else {
+                    // Passwords don't match, show an error message or handle it accordingly
+                    print("New password and confirm password do not match");
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   padding:
@@ -183,7 +201,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   'UPDATE',
                   style: TextStyle(
                     fontFamily: 'DM Sans',
-                    color: Colors.white, // Change this to the desired color
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -193,4 +211,27 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       ),
     );
   }
+}
+
+void changePassword(String newPassword) async {
+  User? user = FirebaseAuth.instance.currentUser;
+
+  try {
+    await user?.updatePassword(newPassword);
+    showToast("Password berhasil diperbarui!");
+  } catch (e) {
+    showToast("Gagal memperbarui password: $e");
+  }
+}
+
+void showToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.black,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
 }

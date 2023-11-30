@@ -215,6 +215,12 @@ class _SignUpPageState extends State<SignUpPage> {
     String email = emailController.text;
     String password = passwordController.text;
 
+// Check if the password meets the minimum length requirement
+    if (password.length < 8) {
+      showToast("Password must be at least 8 characters");
+      return;
+    }
+
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -246,7 +252,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void showToast(String message) {
     Fluttertoast.showToast(
       msg: message,
-      toastLength: Toast.LENGTH_SHORT,
+      toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.CENTER,
       timeInSecForIosWeb: 1,
       backgroundColor: Colors.black,

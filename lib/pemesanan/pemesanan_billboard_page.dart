@@ -29,7 +29,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
         elevation: 0,
         iconTheme: const IconThemeData(
           color: Color(0xFF0D0140),
-          size: 20,
+          size: 30,
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
@@ -55,7 +55,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                   ),
                   child: SizedBox(
                     width: cardWidth,
-                    height: 300,
+                    height: 550, // Adjust height as needed
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -70,46 +70,37 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                         ),
                         Padding(
                           padding:
-                              const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 30.0),
-                          child: Text(
-                            widget.catalogContent,
-                            style: const TextStyle(fontSize: 16),
+                              const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.catalogContent,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const SizedBox(
+                                  height: 16), // Add spacing here if needed
+                              const Text(
+                                'Pembayaran:',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              buildPaymentOptionRadio(1, 'Pembayaran Didepan'),
+                              const Text(
+                                'Pembayaran Melalui Bank:',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              buildPaymentOptionRadio(2, 'Mandiri \n10900'),
+                              buildPaymentOptionRadio(3, 'BTN \n140'),
+                              buildPaymentOptionRadio(4, 'BNI \n21'),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Pembayaran:',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        buildPaymentOptionRadio(1, 'Pembayaran Didepan'),
-                        const SizedBox(height: 8), // Add spacing here
-                        const Text(
-                          'Transfer Bank:',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        buildPaymentOptionRadio(2, 'Mandiri \n10900'),
-                        const SizedBox(height: 8), // Add spacing here
-                        buildPaymentOptionRadio(3, 'BTN \n140'),
-                        const SizedBox(height: 8), // Add spacing here
-                        buildPaymentOptionRadio(4, 'BNI \n21'),
-                      ],
-                    ),
-                  ),
-                ),
                 const Spacer(),
+                SizedBox(height: 20), // Add spacing here
                 Center(
                   child: ElevatedButton(
                     onPressed: selectedPaymentOption != 0
