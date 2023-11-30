@@ -75,7 +75,7 @@ class _DashboardPageState extends State<DashboardPage> {
               right: 8.0,
             ),
             child: Text(
-              'Hallo,',
+              'Selamat Datang,',
               style: TextStyle(
                 color: Colors.black,
                 fontSize: fontSizeFromConstraints(constraints, 0.10),
