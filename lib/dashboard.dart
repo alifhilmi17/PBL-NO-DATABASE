@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'catalog/kendaraan_page.dart';
 import 'catalog/banner_page.dart';
 import 'catalog/billboard_page.dart';
@@ -32,6 +34,19 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 0;
+  late User _currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if a user is authenticated
+    if (FirebaseAuth.instance.currentUser != null) {
+      _currentUser = FirebaseAuth.instance.currentUser!;
+    } else {
+      // Handle the case where the user is not authenticated
+      // You can display a login screen or handle it as needed
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -52,6 +67,19 @@ class _DashboardPageState extends State<DashboardPage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const ProfilePage()));
         break;
+    }
+  }
+
+  Future<DocumentSnapshot> getUserData() async {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: _currentUser.email)
+        .get();
+
+    if (querySnapshot.docs.isNotEmpty) {
+      return querySnapshot.docs.first;
+    } else {
+      return FirebaseFirestore.instance.collection('users').doc().get();
     }
   }
 
@@ -98,24 +126,40 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   Widget buildUserNameText() {
-    return const Align(
-        alignment: Alignment.topLeft,
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 5.0,
-            left: 8.0,
-            right: 8.0,
-          ),
-          child: Text(
-            'Username',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'DM Sans', // Tambahkan font family
+    return FutureBuilder<DocumentSnapshot>(
+      future: getUserData(),
+      builder:
+          (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (snapshot.data == null || !snapshot.data!.exists) {
+          return Text('User data not found');
+        } else {
+          final fullName = snapshot.data!['full_name'];
+          return Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 5.0,
+                left: 8.0,
+                right: 8.0,
+              ),
+              child: Text(
+                ' $fullName',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'DM Sans',
+                ),
+              ),
             ),
-          ),
-        ));
+          );
+        }
+      },
+    );
   }
 
   Widget buildPromotionCard() {

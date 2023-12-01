@@ -1,21 +1,91 @@
+import 'dart:convert'; // Add this import for utf8
+import 'package:crypto/crypto.dart'; // Add this import for sha256
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'login.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key, Key});
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
   bool isPasswordVisible = false;
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    fullNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> registerUser() async {
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    // Check if the password meets the minimum length requirement
+    if (password.length < 8) {
+      showToast("Password must be at least 8 characters");
+      return;
+    }
+
+    try {
+      final auth = FirebaseAuth.instance;
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      await addUser(
+        fullNameController.text,
+        emailController.text,
+        passwordController.text,
+      );
+
+      // Registration successful, you can use userCredential.user to get user information
+      print('User registered: ${userCredential.user?.uid}');
+
+      // Show a toast message
+      showToast("Account created successfully");
+
+      // For this example, navigate to the login page after registration
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
+      );
+    } catch (e) {
+      // Registration failed, handle the error
+      print('Registration failed: $e');
+      showToast("Registration failed: $e");
+    }
+  }
+
+  Future<void> addUser(
+    String fullName,
+    String email,
+    String password,
+  ) async {
+    // Hash the password using SHA-256
+    final passwordBytes = utf8.encode(password);
+    final hashedPassword = sha256.convert(passwordBytes).toString();
+
+    await FirebaseFirestore.instance.collection('users').add({
+      'full_name': fullName,
+      'email': email,
+      'password': hashedPassword,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -209,43 +279,6 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
-  }
-
-  void registerUser() async {
-    String email = emailController.text;
-    String password = passwordController.text;
-
-// Check if the password meets the minimum length requirement
-    if (password.length < 8) {
-      showToast("Password must be at least 8 characters");
-      return;
-    }
-
-    try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-
-      // Registration successful, you can use userCredential.user to get user information
-      print('User registered: ${userCredential.user?.uid}');
-
-      // Show a toast message
-      showToast("Account created successfully");
-
-      // For this example, navigate to the login page after registration
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Login(),
-        ),
-      );
-    } catch (e) {
-      // Registration failed, handle the error
-      print('Registration failed: $e');
-      showToast("Registration failed: $e");
-    }
   }
 
   // Helper function to show a toast message
