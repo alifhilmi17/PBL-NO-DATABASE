@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pubblicita/dashboard.dart';
 import 'profile_settings.dart';
 import 'package:pubblicita/cart/keranjang_page.dart';
@@ -12,6 +14,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late User _currentUser;
+
   int _selectedIndex = 0;
   final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _businessNameController = TextEditingController();
@@ -19,8 +23,29 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
-  // Add a variable to store the user's name
+  // Initialize the user's name to an empty string
   String _userName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if a user is authenticated
+    _currentUser = FirebaseAuth.instance.currentUser!;
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('users')
+        .doc(_currentUser.uid)
+        .get();
+
+    if (snapshot.exists) {
+      return snapshot;
+    } else {
+      return FirebaseFirestore.instance.collection('users').doc().get();
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -47,11 +72,10 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  // Method to update the user's name (for example, after successful login)
+  // Method to update the user's name (for example, after a successful login)
   void _updateUserName() {
     // Simulated login success. Replace this with your actual authentication logic.
-    // For now, let's assume the user's name is "John Doe."
-    String loggedInUserName = "";
+    String loggedInUserName = 'John Doe'; // Replace with the actual user name
 
     setState(() {
       _userName = loggedInUserName;
@@ -110,11 +134,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               const SizedBox(height: 8), // Reduced spacing
                               Text(
-                                _userName.isNotEmpty ? _userName : '',
+                                _userName.isNotEmpty ? _userName : _userName,
                                 style: TextStyle(
-                                  fontSize: constraints.maxWidth < 200
-                                      ? 14
-                                      : 18, // Adjusted font size
+                                  fontSize:
+                                      constraints.maxWidth < 200 ? 14 : 18,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),

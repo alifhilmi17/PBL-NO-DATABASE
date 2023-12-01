@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pubblicita/tampilan_chat.dart';
 import 'catalog/kendaraan_page.dart';
 import 'catalog/banner_page.dart';
 import 'catalog/billboard_page.dart';
@@ -118,7 +119,10 @@ class _DashboardPageState extends State<DashboardPage> {
           icon: const Icon(Icons.chat),
           iconSize: iconSizeFromConstraints(constraints),
           onPressed: () {
-            // Add logic for chat icon pressed
+            MaterialPageRoute(
+                builder: (context) => ChatScreen(
+                    // Add logic for chat icon pressed
+                    ));
           },
         ),
       ],
