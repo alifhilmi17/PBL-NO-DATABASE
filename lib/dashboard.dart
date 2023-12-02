@@ -119,10 +119,14 @@ class _DashboardPageState extends State<DashboardPage> {
           icon: const Icon(Icons.chat),
           iconSize: iconSizeFromConstraints(constraints),
           onPressed: () {
-            MaterialPageRoute(
-                builder: (context) => ChatScreen(
-                    // Add logic for chat icon pressed
-                    ));
+            // Navigasi ke halaman obrolan
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ChatScreen(), // Gantilah ChatPage dengan nama kelas halaman obrolan yang sesuai
+              ),
+            );
           },
         ),
       ],

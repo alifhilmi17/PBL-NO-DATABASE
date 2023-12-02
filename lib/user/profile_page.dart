@@ -15,6 +15,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late User _currentUser;
+  String _userName = ''; // Initialize to an empty string
 
   int _selectedIndex = 0;
   final TextEditingController _fullNameController = TextEditingController();
@@ -23,17 +24,18 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _phoneNumberController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
 
-  // Initialize the user's name to an empty string
-  String _userName = '';
-
   @override
   void initState() {
     super.initState();
     // Check if a user is authenticated
     _currentUser = FirebaseAuth.instance.currentUser!;
+
+    // Call the method to update user name during initialization
+    _updateUserName();
   }
 
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserData() async {
+  Future<void> _updateUserName() async {
+    // Retrieve user data from Firestore
     DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
         .instance
         .collection('users')
@@ -41,9 +43,15 @@ class _ProfilePageState extends State<ProfilePage> {
         .get();
 
     if (snapshot.exists) {
-      return snapshot;
-    } else {
-      return FirebaseFirestore.instance.collection('users').doc().get();
+      // Use the display name from Firebase user or replace it with the actual field name
+      String displayName = _currentUser.displayName ?? 'Nama Pengguna Default';
+
+      setState(() {
+        _userName = displayName;
+      });
+
+      // Update other UI elements, like the _fullNameController, with the user's name.
+      _fullNameController.text = _userName;
     }
   }
 
@@ -70,19 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
         _updateUserName(); // Call a method to update the user's name
       }
     });
-  }
-
-  // Method to update the user's name (for example, after a successful login)
-  void _updateUserName() {
-    // Simulated login success. Replace this with your actual authentication logic.
-    String loggedInUserName = 'John Doe'; // Replace with the actual user name
-
-    setState(() {
-      _userName = loggedInUserName;
-    });
-
-    // Now you can update other UI elements, like the _fullNameController, with the user's name.
-    _fullNameController.text = _userName;
   }
 
   @override
