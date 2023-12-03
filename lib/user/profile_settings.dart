@@ -11,7 +11,7 @@ void main() {
 }
 
 class ProfileSettingsPage extends StatefulWidget {
-  const ProfileSettingsPage({super.key});
+  const ProfileSettingsPage({Key? key});
 
   @override
   _ProfileSettingsPageState createState() => _ProfileSettingsPageState();
@@ -187,6 +187,16 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => const LoginPage(),
+                                    ),
+                                  );
+
+                                  // Show a SnackBar with the success message
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('Successfully logged out.'),
+                                      duration: Duration(
+                                          seconds:
+                                              2), // You can adjust the duration as needed
                                     ),
                                   );
                                 },

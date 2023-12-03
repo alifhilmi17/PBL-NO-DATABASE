@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pubblicita/pemesanan/pemesanan_kendaraan_page.dart';
 
 class DetailMobilPage extends StatefulWidget {
@@ -9,6 +10,8 @@ class DetailMobilPage extends StatefulWidget {
 }
 
 class _DetailMobilPageState extends State<DetailMobilPage> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,7 +76,6 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
               ],
             ),
           ),
-
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +92,6 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
                     ),
                   ),
                 ),
-
                 // Card 2
                 Center(
                   child: Padding(
@@ -102,7 +103,7 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
                       imagePath: 'images/fulldesign.jpg',
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -153,6 +154,11 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
               right: 10,
               child: ElevatedButton(
                 onPressed: () {
+                  addDataToFirestore(
+                    jenisKendaraan: jenisKendaraan,
+                    catalogContent: catalogContent,
+                    imagePath: imagePath,
+                  );
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -203,5 +209,24 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
         ),
       ),
     );
+  }
+
+  // Function to add data to Firestore
+  Future<void> addDataToFirestore({
+    required String jenisKendaraan,
+    required String catalogContent,
+    required String imagePath,
+  }) async {
+    try {
+      await _firestore.collection('mobilData').add({
+        'jenisKendaraan': jenisKendaraan,
+        'catalogContent': catalogContent,
+        'imagePath': imagePath,
+        // Add more fields if needed
+      });
+      print('Data added to Firestore successfully!');
+    } catch (e) {
+      print('Error adding data to Firestore: $e');
+    }
   }
 }

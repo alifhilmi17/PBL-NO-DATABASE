@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pubblicita/pembayaran/pembayaran_banner_page.dart';
 
 class PemesananBannerPage extends StatefulWidget {
@@ -18,7 +19,8 @@ class PemesananBannerPage extends StatefulWidget {
 }
 
 class _PemesananBannerPageState extends State<PemesananBannerPage> {
-  int selectedPaymentOption = 0; // Default selected payment option
+  int selectedPaymentOption = 0;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                   ),
                   child: SizedBox(
                     width: cardWidth,
-                    height: 550, // Adjust height as needed
+                    height: 550,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -78,8 +80,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                                 widget.catalogContent,
                                 style: const TextStyle(fontSize: 16),
                               ),
-                              const SizedBox(
-                                  height: 16), // Add spacing here if needed
+                              const SizedBox(height: 16),
                               const Text(
                                 'Pembayaran:',
                                 style: TextStyle(fontSize: 18),
@@ -100,12 +101,16 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                   ),
                 ),
                 const Spacer(),
-                SizedBox(height: 20), // Add spacing here
+                SizedBox(height: 20),
                 Center(
                   child: ElevatedButton(
                     onPressed: selectedPaymentOption != 0
-                        ? () {
-                            // Navigate to the payment page with the necessary data
+                        ? () async {
+                            await saveDataToFirestore(
+                              widget.jenisBanner,
+                              selectedPaymentOption,
+                            );
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -121,8 +126,9 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF1A424B),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 15,
-                          vertical: 15), // Adjust the padding as needed
+                        horizontal: 15,
+                        vertical: 15,
+                      ),
                       minimumSize: Size(
                         cardWidth,
                         0,
@@ -166,5 +172,23 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
         Text(label),
       ],
     );
+  }
+
+  Future<void> saveDataToFirestore(
+    String jenisBanner,
+    int selectedPaymentOption,
+  ) async {
+    try {
+      CollectionReference orders = _firestore.collection('orders');
+      await orders.add({
+        'jenisBanner': jenisBanner,
+        'selectedPaymentOption': selectedPaymentOption,
+        'orderPrice': 'Rp.200.000',
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('Error saving data to Firestore: $e');
+      // Handle the error as needed
+    }
   }
 }
