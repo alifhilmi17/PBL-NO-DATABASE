@@ -92,8 +92,9 @@ class PaymentPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Pembayaran Berhasil'),
-          content: const Text('Terima kasih! Pembayaran Anda telah berhasil.'),
+          title: const Text('Pemesanan Berhasil'),
+          content: const Text(
+              'Terima kasih! Atas Pemesanannya Harap Meelakukan Pembayaran.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {

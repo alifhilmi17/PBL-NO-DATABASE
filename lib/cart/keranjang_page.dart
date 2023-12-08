@@ -1,33 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pubblicita/dashboard.dart';
 import 'package:pubblicita/user/profile_page.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: CartPage(),
     );
   }
 }
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  const CartPage({Key? key}) : super(key: key);
 
   @override
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
-  int _selectedIndex = 0;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> _paymentStream;
+  int _selectedIndex = 1; // Default selected index for CartPage
 
-  // State untuk melacak apakah setiap ikon ditekan atau tidak
+  // State to track whether each icon is pressed or not
   bool isShoppingBagPressed = false;
-  bool isCreditCardPressed = false;
+
   bool isLocalShippingPressed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _paymentStream =
+        FirebaseFirestore.instance.collection('payments').snapshots();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -37,7 +50,6 @@ class _CartPageState extends State<CartPage> {
     // Navigate to the corresponding page based on the selected index
     switch (index) {
       case 0:
-        // Dashboard page
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const DashboardPage()),
@@ -45,10 +57,8 @@ class _CartPageState extends State<CartPage> {
         break;
       case 1:
         // Cart page
-        // Jika Anda ingin tetap di halaman ini, Anda bisa menghilangkan aksi ini
         break;
       case 2:
-        // Profile page
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const ProfilePage()),
@@ -117,12 +127,53 @@ class _CartPageState extends State<CartPage> {
               children: [
                 buildIconWithText(Icons.shopping_bag_outlined, 'Orderan',
                     isShoppingBagPressed),
-                buildIconWithText(
-                    Icons.credit_card, 'Belum Bayar', isCreditCardPressed),
                 buildIconWithText(Icons.local_shipping_outlined, 'Progress',
                     isLocalShippingPressed),
               ],
             ),
+
+            // Display payment information only if shopping bag is pressed
+            if (isShoppingBagPressed)
+              StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                stream: _paymentStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Error loading payments: ${snapshot.error}');
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+
+                  List<QueryDocumentSnapshot<Map<String, dynamic>>> payments =
+                      snapshot.data!.docs;
+
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: payments.length,
+                      itemBuilder: (context, index) {
+                        var paymentData = payments[index].data();
+
+                        return Card(
+                            child: ListTile(
+                          title:
+                              Text('Order Code: ${paymentData['orderCode']}'),
+                          subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    'Billboard: ${paymentData['jenisBillboard']}'),
+                                Text('Banner: ${paymentData['jenisBanner']}'),
+                                Text(
+                                    'Kendaraan: ${paymentData['jenisKendaraan']}'),
+                                // Add more fields as needed
+                              ]),
+                        ));
+                      },
+                    ),
+                  );
+                },
+              ),
           ],
         ),
       ),
@@ -172,8 +223,6 @@ class _CartPageState extends State<CartPage> {
         setState(() {
           if (icon == Icons.shopping_bag_outlined) {
             isShoppingBagPressed = !isShoppingBagPressed;
-          } else if (icon == Icons.credit_card) {
-            isCreditCardPressed = !isCreditCardPressed;
           } else if (icon == Icons.local_shipping_outlined) {
             isLocalShippingPressed = !isLocalShippingPressed;
           }
@@ -184,17 +233,13 @@ class _CartPageState extends State<CartPage> {
           Icon(
             icon,
             size: 35,
-            color: isPressed
-                ? Colors.blue
-                : Colors.black, // Change color when pressed
+            color: isPressed ? Colors.blue : Colors.black,
           ),
           const SizedBox(height: 8),
           Text(
             text,
             style: TextStyle(
-              color: isPressed
-                  ? Colors.blue
-                  : Colors.black, // Change text color when pressed
+              color: isPressed ? Colors.blue : Colors.black,
             ),
           ),
         ],
