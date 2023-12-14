@@ -1,6 +1,5 @@
-import 'dart:convert'; // Add this import for utf8
-import 'package:crypto/crypto.dart'; // Add this import for sha256
-
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,13 +17,19 @@ class _SignUpPageState extends State<SignUpPage> {
   bool isPasswordVisible = false;
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController businessNameController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
     fullNameController.dispose();
     emailController.dispose();
+    businessNameController.dispose();
+    phoneNumberController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -35,6 +40,12 @@ class _SignUpPageState extends State<SignUpPage> {
     // Check if the password meets the minimum length requirement
     if (password.length < 8) {
       showToast("Password must be at least 8 characters");
+      return;
+    }
+
+    // Check if the password and confirm password match
+    if (password != confirmPasswordController.text) {
+      showToast("Password and Confirm Password do not match");
       return;
     }
 
@@ -49,6 +60,8 @@ class _SignUpPageState extends State<SignUpPage> {
         fullNameController.text,
         emailController.text,
         passwordController.text,
+        businessNameController.text,
+        phoneNumberController.text,
       );
 
       // Registration successful, you can use userCredential.user to get user information
@@ -75,6 +88,8 @@ class _SignUpPageState extends State<SignUpPage> {
     String fullName,
     String email,
     String password,
+    String businessName, // Added business name parameter
+    String phoneNumber, // Added phone number parameter
   ) async {
     // Hash the password using SHA-256
     final passwordBytes = utf8.encode(password);
@@ -84,6 +99,8 @@ class _SignUpPageState extends State<SignUpPage> {
       'full_name': fullName,
       'email': email,
       'password': hashedPassword,
+      'business_name': businessName, // Added business name field
+      'phone_number': phoneNumber, // Added phone number field
     });
   }
 
@@ -113,114 +130,27 @@ class _SignUpPageState extends State<SignUpPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Full Name",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'DM Sans',
-                      fontSize: 12,
-                      color: Color(0xff0D0140),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: TextField(
-                      controller: fullNameController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Nama Lengkap Anda",
-                        hintStyle: TextStyle(
-                          fontFamily: 'DM Sans',
-                          fontSize: 12,
-                          color: const Color(0xffff0d0140).withOpacity(0.6),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 17),
-                      ),
-                    ),
-                  ),
+                  buildTextField(
+                      "Full Name", fullNameController, "Nama Lengkap Anda"),
                   const SizedBox(height: 15),
-                  const Text(
-                    "Email",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'DM Sans',
-                      fontSize: 12,
-                      color: Color(0xff0D0140),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Email Anda",
-                        hintStyle: TextStyle(
-                          fontFamily: 'DM Sans',
-                          fontSize: 12,
-                          color: const Color(0xffff0d0140).withOpacity(0.6),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 17),
-                      ),
-                    ),
-                  ),
+                  buildTextField("Email", emailController, "Email Anda"),
                   const SizedBox(height: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Password",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'DM Sans',
-                          fontSize: 12,
-                          color: Color(0xff0D0140),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: passwordController,
-                          obscureText: !isPasswordVisible,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 17),
-                            suffixIcon: IconButton(
-                              icon: isPasswordVisible
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.visibility),
-                              onPressed: () {
-                                setState(() {
-                                  isPasswordVisible = !isPasswordVisible;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  buildTextField(
+                      "Business Name", businessNameController, "Nama Usaha"),
+                  const SizedBox(height: 15),
+                  buildTextField(
+                      "Phone Number", phoneNumberController, "Nomor Telepon"),
+                  const SizedBox(height: 15),
+                  buildPasswordField(
+                    "Password",
+                    passwordController,
                   ),
                 ],
               ),
-              const SizedBox(
+              const SizedBox(height: 15),
+              // Add Confirm Password Field
+              buildPasswordField("Confirm Password", confirmPasswordController),
+              SizedBox(
                 height: 20,
               ),
               Container(
@@ -278,6 +208,90 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildTextField(
+      String label, TextEditingController controller, String hintText) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'DM Sans',
+            fontSize: 12,
+            color: Color(0xff0D0140),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
+          child: TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintText: hintText,
+              hintStyle: const TextStyle(
+                fontFamily: 'DM Sans',
+                fontSize: 12,
+                color: Color(0xffff0d0140),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildPasswordField(String label, TextEditingController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'DM Sans',
+            fontSize: 12,
+            color: Color(0xff0D0140),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
+          child: TextField(
+            controller: controller,
+            obscureText: !isPasswordVisible,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+              suffixIcon: IconButton(
+                icon: isPasswordVisible
+                    ? const Icon(Icons.visibility_off)
+                    : const Icon(Icons.visibility),
+                onPressed: () {
+                  setState(() {
+                    isPasswordVisible = !isPasswordVisible;
+                  });
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

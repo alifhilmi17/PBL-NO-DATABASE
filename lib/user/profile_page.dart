@@ -21,7 +21,6 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _businessNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
 
   @override
   void initState() {
@@ -64,6 +63,28 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  void _saveChanges() async {
+    try {
+      // Get the current user's document reference
+      DocumentReference userRef =
+          FirebaseFirestore.instance.collection('users').doc(_currentUser?.uid);
+
+      // Update the user data in Firestore
+      await userRef.update({
+        'full_name': _fullNameController.text,
+        'business_name': _businessNameController.text,
+        'email': _emailController.text,
+        'phone_number': _phoneNumberController.text,
+      });
+
+      // Show a success message or navigate to another screen if needed
+      print('Changes saved successfully!');
+    } catch (e) {
+      // Handle errors
+      print('Error saving changes: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -83,95 +104,29 @@ class _ProfilePageState extends State<ProfilePage> {
             } else if (snapshot.data == null || !snapshot.data!.exists) {
               return Text('User data not found');
             } else {
+              // Extract user data from the snapshot
               final fullName = snapshot.data!['full_name'];
-              return Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(height: 40),
-                    Card(
-                      elevation: 10,
-                      margin: const EdgeInsets.all(0),
-                      color: const Color(0xFF143E47),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Container(
-                            height: 150.0,
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('images/bgprofile.png'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            child: LayoutBuilder(
-                              builder: (BuildContext context,
-                                  BoxConstraints constraints) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    CircleAvatar(
-                                      radius:
-                                          constraints.maxWidth < 200 ? 30 : 40,
-                                      backgroundImage:
-                                          const AssetImage('images/jfgg.jpg'),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      fullName,
-                                      style: TextStyle(
-                                        fontSize: constraints.maxWidth < 200
-                                            ? 14
-                                            : 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 4),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: IconButton(
-                              icon: const Icon(
-                                Icons.settings,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ProfileSettingsPage(),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    buildInfoCard(
-                        'Nama Lengkap', _fullNameController, 'Nama Anda'),
-                    buildInfoCard('Nama Usaha', _businessNameController,
-                        'Nama Usaha Anda'),
-                    buildInfoCard('Email', _emailController, 'Email Anda'),
-                    buildInfoCard('Nomor Telepon', _phoneNumberController,
-                        'Nomor Telepon Anda'),
-                    buildInfoCard('Lokasi Usaha', _locationController,
-                        'Lokasi Usaha Anda'),
-                  ],
-                ),
+              final businessName = snapshot.data!['business_name'];
+              final email = snapshot.data!['email'];
+              final phoneNumber = snapshot.data!['phone_number'];
+
+              // Update TextEditingController values
+              _fullNameController.text = fullName;
+              _businessNameController.text = businessName;
+              _emailController.text = email;
+              _phoneNumberController.text = phoneNumber;
+
+              return ListView(
+                children: [
+                  _buildUserProfileCard(fullName),
+                  buildInfoCard(
+                      'Nama Lengkap', _fullNameController, 'Nama Anda'),
+                  buildInfoCard(
+                      'Nama Usaha', _businessNameController, 'Nama Usaha Anda'),
+                  buildInfoCard('Email', _emailController, 'Email Anda'),
+                  buildInfoCard('Nomor Telepon', _phoneNumberController,
+                      'Nomor Telepon Anda'),
+                ],
               );
             }
           },
@@ -212,6 +167,90 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: _saveChanges,
+          child: Text('Save'),
+          backgroundColor: const Color(0xFF143E47),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUserProfileCard(String fullName) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(height: 40),
+          Card(
+            elevation: 10,
+            margin: const EdgeInsets.all(0),
+            color: const Color(0xFF143E47),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Container(
+                  height: 150.0,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('images/bgprofile.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: LayoutBuilder(
+                    builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircleAvatar(
+                            radius: constraints.maxWidth < 200 ? 30 : 40,
+                            backgroundImage:
+                                const AssetImage('images/jfgg.jpg'),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            fullName,
+                            style: TextStyle(
+                              fontSize: constraints.maxWidth < 200 ? 14 : 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.settings,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfileSettingsPage(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+        ],
       ),
     );
   }
