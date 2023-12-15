@@ -66,7 +66,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                           child: Image.asset(
                             widget.imagePath,
                             width: cardWidth - 20,
-                            height: 120,
+                            height: 110,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -80,15 +80,15 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                                 widget.catalogContent,
                                 style: const TextStyle(fontSize: 16),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 10),
                               const Text(
                                 'Pembayaran:',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: 15),
                               ),
                               buildPaymentOptionRadio(1, 'Pembayaran Didepan'),
                               const Text(
                                 'Pembayaran Melalui Bank:',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: 15),
                               ),
                               buildPaymentOptionRadio(2, 'Mandiri \n10900'),
                               buildPaymentOptionRadio(3, 'BTN \n140'),

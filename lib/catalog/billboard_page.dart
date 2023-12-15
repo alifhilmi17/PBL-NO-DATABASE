@@ -112,7 +112,7 @@ class _BillboardPageState extends State<BillboardPage> {
                   child: buildCard(
                     jenisBillboard: 'Billboard L',
                     catalogContent:
-                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                     imagePath: 'images/gambarcatalogbillboard.png',
                   ),
                 ),

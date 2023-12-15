@@ -49,6 +49,13 @@ class _SignUpPageState extends State<SignUpPage> {
       return;
     }
 
+    // Check if the password contains at least one capital letter and one digit
+    if (!RegExp(r'(?=.*[A-Z])(?=.*[0-9])').hasMatch(password)) {
+      showToast(
+          "Password must contain at least one capital letter and one digit");
+      return;
+    }
+
     try {
       final auth = FirebaseAuth.instance;
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(

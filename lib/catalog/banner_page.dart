@@ -112,7 +112,7 @@ class _BannerPageState extends State<BannerPage> {
                   child: buildCard(
                     jenisBanner: 'Banner L',
                     catalogContent:
-                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                     imagePath: 'images/gambarcatalogbillboard.png',
                   ),
                 ),
@@ -125,7 +125,7 @@ class _BannerPageState extends State<BannerPage> {
                   child: buildCard(
                     jenisBanner: 'Banner XL',
                     catalogContent:
-                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                        'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                     imagePath: 'images/gambarcatalogbillboard.png',
                   ),
                 ),

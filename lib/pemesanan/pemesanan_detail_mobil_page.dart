@@ -87,7 +87,7 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
                     child: buildCard(
                       jenisKendaraan: 'Half Design',
                       catalogContent:
-                          'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                          'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                       imagePath: 'images/half design.jpg',
                     ),
                   ),
@@ -99,7 +99,7 @@ class _DetailMobilPageState extends State<DetailMobilPage> {
                     child: buildCard(
                       jenisKendaraan: 'Full Design',
                       catalogContent:
-                          'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                          'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                       imagePath: 'images/fulldesign.jpg',
                     ),
                   ),

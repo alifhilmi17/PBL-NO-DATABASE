@@ -66,7 +66,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                           child: Image.asset(
                             widget.imagePath,
                             width: cardWidth - 20,
-                            height: 120,
+                            height: 110,
                             fit: BoxFit.cover,
                           ),
                         ),

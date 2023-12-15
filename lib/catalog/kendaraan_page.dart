@@ -177,7 +177,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             ),
                             const SizedBox(height: 10),
                             const Text(
-                              'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                              'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -241,7 +241,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                                     const PemesananKendaraanPage(
                                   jenisKendaraan: 'Motor',
                                   catalogContent:
-                                      'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                                      'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                                   imagePath: 'images/motor.png',
                                 ),
                               ),
@@ -273,7 +273,7 @@ class _KendaraanPageState extends State<KendaraanPage> {
                             ),
                             const SizedBox(height: 10),
                             const Text(
-                              'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan \nAdobe Photoshop dan CorelDraw.',
+                              'Media promosi yang dicetak menggunakan \nprint digital berbentuk portrait atau vertikal.\nDi design menggunakan Adobe \nPhotoshop dan CorelDraw.',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
