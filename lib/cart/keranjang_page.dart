@@ -53,10 +53,6 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
-  // State to track whether each icon is pressed or not
-  bool isShoppingBagPressed = false;
-  bool isLocalShippingPressed = false;
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -141,64 +137,55 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      buildIconWithText(Icons.shopping_bag_outlined, 'Orderan',
-                          isShoppingBagPressed),
-                      buildIconWithText(Icons.local_shipping_outlined,
-                          'Progress', isLocalShippingPressed),
-                    ],
-                  ),
+                  StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                    stream: _paymentStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Text(
+                            'Error loading payments: ${snapshot.error}');
+                      }
 
-                  // Display payment information only if shopping bag is pressed
-                  if (isShoppingBagPressed)
-                    StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                      stream: _paymentStream,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasError) {
-                          return Text(
-                              'Error loading payments: ${snapshot.error}');
-                        }
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      }
 
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return CircularProgressIndicator();
-                        }
+                      List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                          payments = snapshot.data!.docs;
 
-                        List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                            payments = snapshot.data!.docs;
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: payments.length,
+                          itemBuilder: (context, index) {
+                            var paymentData = payments[index].data();
 
-                        return Expanded(
-                          child: ListView.builder(
-                            itemCount: payments.length,
-                            itemBuilder: (context, index) {
-                              var paymentData = payments[index].data();
-
-                              return Card(
-                                child: ListTile(
-                                  title: Text(
-                                      'Order Code: ${paymentData['orderCode']}'),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          'Billboard: ${paymentData['jenisBillboard']}'),
-                                      Text(
-                                          'Banner: ${paymentData['jenisBanner']}'),
-                                      Text(
-                                          'Kendaraan: ${paymentData['jenisKendaraan']}'),
-                                      // Add more fields as needed
-                                    ],
-                                  ),
+                            return Card(
+                              child: ListTile(
+                                title: Text(
+                                    'Order Code: ${paymentData['orderCode']}'),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                        'Billboard: ${paymentData['jenisBillboard']}'),
+                                    Text(
+                                        'Banner: ${paymentData['jenisBanner']}'),
+                                    Text(
+                                        'Kendaraan: ${paymentData['jenisKendaraan']}'),
+                                    SizedBox(height: 10),
+                                    Text(
+                                        'Status Pembayaran: ${paymentData['']}'),
+                                    Text(
+                                        'Status Pengerjaan: ${paymentData['']}'),
+                                    // Add more fields as needed
+                                  ],
                                 ),
-                              );
-                            },
-                          ),
-                        );
-                      },
-                    ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             );
@@ -240,37 +227,6 @@ class _CartPageState extends State<CartPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildIconWithText(IconData icon, String text, bool isPressed) {
-    return GestureDetector(
-      onTap: () {
-        // Toggle the state when the icon is pressed
-        setState(() {
-          if (icon == Icons.shopping_bag_outlined) {
-            isShoppingBagPressed = !isShoppingBagPressed;
-          } else if (icon == Icons.local_shipping_outlined) {
-            isLocalShippingPressed = !isLocalShippingPressed;
-          }
-        });
-      },
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            size: 35,
-            color: isPressed ? Colors.blue : Colors.black,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            text,
-            style: TextStyle(
-              color: isPressed ? Colors.blue : Colors.black,
-            ),
-          ),
-        ],
       ),
     );
   }

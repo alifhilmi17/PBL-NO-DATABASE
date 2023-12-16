@@ -114,108 +114,110 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFC0DCDD),
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                "Buat Akun Anda",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'DM Sans',
-                  fontSize: 30,
-                  color: Color(0xff0D0140),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        backgroundColor: const Color(0xFFC0DCDD),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  buildTextField(
-                      "Full Name", fullNameController, "Nama Lengkap Anda"),
-                  const SizedBox(height: 15),
-                  buildTextField("Email", emailController, "Email Anda"),
-                  const SizedBox(height: 15),
-                  buildTextField(
-                      "Business Name", businessNameController, "Nama Usaha"),
-                  const SizedBox(height: 15),
-                  buildTextField(
-                      "Phone Number", phoneNumberController, "Nomor Telepon"),
-                  const SizedBox(height: 15),
-                  buildPasswordField(
-                    "Password",
-                    passwordController,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              // Add Confirm Password Field
-              buildPasswordField("Confirm Password", confirmPasswordController),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: double.infinity,
-                height: 50,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF1B424C),
-                  ),
-                  onPressed: registerUser,
-                  child: const Text(
-                    "DAFTAR",
+                  const Text(
+                    "Buat Akun Anda",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'DM Sans',
-                      color: Colors.white,
+                      fontSize: 30,
+                      color: Color(0xff0D0140),
                     ),
                   ),
-                ),
-              ),
-              SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Sudah Punya Akun? ",
-                    style: TextStyle(
-                      fontFamily: 'DM Sans',
-                      color: Color(0xff524B6B),
-                      fontSize: 12,
-                    ),
+                  const SizedBox(
+                    height: 20,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Login(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildTextField(
+                          "Full Name", fullNameController, "Nama Lengkap Anda"),
+                      const SizedBox(height: 15),
+                      buildTextField("Email", emailController, "Email Anda"),
+                      const SizedBox(height: 15),
+                      buildTextField("Business Name", businessNameController,
+                          "Nama Usaha"),
+                      const SizedBox(height: 15),
+                      buildTextField("Phone Number", phoneNumberController,
+                          "Nomor Telepon"),
+                      const SizedBox(height: 15),
+                      buildPasswordField(
+                        "Password",
+                        passwordController,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  // Add Confirm Password Field
+                  buildPasswordField(
+                      "Confirm Password", confirmPasswordController),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 50,
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1B424C),
+                      ),
+                      onPressed: registerUser,
+                      child: const Text(
+                        "DAFTAR",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'DM Sans',
+                          color: Colors.white,
                         ),
-                      );
-                    },
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                        fontFamily: 'DM Sans',
-                        color: Color(0xffFF9228),
-                        fontSize: 12,
                       ),
                     ),
                   ),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Sudah Punya Akun? ",
+                        style: TextStyle(
+                          fontFamily: 'DM Sans',
+                          color: Color(0xff524B6B),
+                          fontSize: 12,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Login(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(
+                            fontFamily: 'DM Sans',
+                            color: Color(0xffFF9228),
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget buildTextField(
