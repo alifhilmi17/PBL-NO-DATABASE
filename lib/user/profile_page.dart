@@ -267,7 +267,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Text(
               title,
               style: const TextStyle(
-                fontSize: 12,
+                fontSize: 14, // Increase the font size for the title
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
@@ -280,18 +280,22 @@ class _ProfilePageState extends State<ProfilePage> {
             color: Colors.white,
             margin: const EdgeInsets.symmetric(vertical: 8),
             child: ListTile(
-              title: TextField(
-                controller: controller,
-                onChanged: (text) {
-                  // Do something with the changed text, if needed
-                  // Example: Save to a variable or perform validation
-                },
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Colors.black,
-                ),
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
+              title: Container(
+                padding: const EdgeInsets.all(
+                    10), // Increase the padding for the text field
+                child: TextField(
+                  controller: controller,
+                  onChanged: (text) {
+                    // Do something with the changed text, if needed
+                    // Example: Save to a variable or perform validation
+                  },
+                  style: const TextStyle(
+                    fontSize: 14, // Increase the font size for the text field
+                    color: Colors.black,
+                  ),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                  ),
                 ),
               ),
             ),
