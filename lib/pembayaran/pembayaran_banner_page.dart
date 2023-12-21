@@ -223,13 +223,6 @@ class PaymentPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Penjual:',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
                               'Nama Penjual: Seller Name\n'
                               'Email: Seller@example.com\n'
                               'Nomor Telepon: +1 123-456-7890',
