@@ -169,8 +169,13 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: _saveChanges,
-          child: Text('Save'),
           backgroundColor: const Color(0xFF143E47),
+          child: Text(
+            'Save',
+            style: TextStyle(
+              color: Colors.white, // Warna teks diatur menjadi putih di sini
+            ),
+          ),
         ),
       ),
     );

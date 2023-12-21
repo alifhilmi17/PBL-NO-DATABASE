@@ -12,7 +12,6 @@ class PaymentPage extends StatelessWidget {
   final String orderCode;
 
   PaymentPage({
-    super.key,
     required this.jenisBanner,
     required this.selectedPaymentOption,
     required this.orderPrice,
@@ -33,14 +32,18 @@ class PaymentPage extends StatelessWidget {
                 .doc(user.uid)
                 .get();
 
-        return snapshot.data() ?? {};
+        if (snapshot.exists) {
+          Map<String, dynamic> userData = snapshot.data() ?? {};
+          return userData;
+        } else {
+          print('User document not found or lacks necessary fields.');
+          return {};
+        }
       } else {
-        // Handle the case where the user is not logged in
         return {};
       }
     } catch (e) {
       print('Error fetching user data: $e');
-      // Handle the error as needed
       return {};
     }
   }
@@ -69,8 +72,6 @@ class PaymentPage extends StatelessWidget {
       _showSuccessMessage(context);
     } catch (e) {
       print('Error saving payment data: $e');
-      // Handle the error as needed
-      // Show an error message to the user
     }
   }
 
