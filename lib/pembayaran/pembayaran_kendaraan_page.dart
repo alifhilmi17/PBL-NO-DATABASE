@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pubblicita/cart/keranjang_page.dart';
 
+class Order {
+  final String orderCode;
+  final String jenisKendaraan;
+  final int selectedPaymentOption;
+  final String orderPrice;
+
+  Order({
+    required this.orderCode,
+    required this.jenisKendaraan,
+    required this.selectedPaymentOption,
+    required this.orderPrice,
+  });
+}
+
 class PaymentPage extends StatelessWidget {
   final String jenisKendaraan;
   final int selectedPaymentOption;
   final String orderPrice;
-  final String orderCode;
+  final String orderId;
 
   PaymentPage({
     Key? key,
     required this.jenisKendaraan,
     required this.selectedPaymentOption,
     required this.orderPrice,
-  }) : orderCode = generateOrderCode(jenisKendaraan);
-
-  static String generateOrderCode(String jenisKendaraan) {
-    return 'Kendaraan_${jenisKendaraan}_${DateFormat('ddMMyyyy_HHmmss').format(DateTime.now())}';
-  }
+    required this.orderId,
+  });
 
   Future<Map<String, dynamic>> _fetchUserData() async {
     try {
@@ -66,6 +76,7 @@ class PaymentPage extends StatelessWidget {
       BuildContext context) async {
     try {
       await savePaymentDataToFirestore();
+
       _showSuccessMessage(context);
     } catch (e) {
       print('Error saving payment data: $e');
@@ -79,10 +90,11 @@ class PaymentPage extends StatelessWidget {
         FirebaseFirestore.instance.collection('payments');
 
     await payments.add({
-      'orderCode': orderCode,
+      'orderId': orderId,
       'jenisKendaraan': jenisKendaraan,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
+      'status': 'PENDING',
       'timestamp': FieldValue.serverTimestamp(),
     });
   }
@@ -94,7 +106,7 @@ class PaymentPage extends StatelessWidget {
         return AlertDialog(
           title: const Text('Pemesanan Berhasil'),
           content: const Text(
-              'Terima kasih! Atas Pemesanannya Harap Meelakukan Pembayaran.'),
+              'Terima kasih! Atas Pemesanannya Harap Melakukan Pembayaran.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -126,9 +138,9 @@ class PaymentPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Nama Pembeli: ${userData['displayName'] ?? 'John Doe'}\n'
-                'Email: ${userData['email'] ?? 'john@example.com'}\n'
-                'Nomor Telepon: ${userData['phoneNumber'] ?? '+1 123-456-7890'}',
+                'Nama Pembeli: ${userData['displayName'] ?? 'displayName'}\n'
+                'Email: ${userData['email'] ?? ''}\n'
+                'Nomor Telepon: ${userData['phoneNumber'] ?? ''}',
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -193,7 +205,7 @@ class PaymentPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            orderCode,
+                            orderId,
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -208,30 +220,29 @@ class PaymentPage extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                   ),
                   _buildUserDataCard(userData),
-                  SizedBox(
-                    width: 500,
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: const Color(0xB21B424C),
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nama Penjual: Seller Name\n'
-                              'Email: Seller@example.com\n'
-                              'Nomor Telepon: +1 123-456-7890',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
+                  // Added another call for consistency
+
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    color: const Color(0xB21B424C), // Warna latar belakang card
+                    child: const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nama Penjual: Seller Name\n'
+                            'Email: Seller@example.com\n'
+                            'Nomor Telepon: +1 123-456-7890',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -277,7 +288,7 @@ class PaymentPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 15),
                             const Text(
-                              'Dimohon setelah melakukan pembayaran,\ndapat menambahkan screenshoot layar untuk verifikasi',
+                              'Dimohon setelah melakukan pembayaran,\ndapat menambahkan screenshot layar untuk verifikasi',
                               style: TextStyle(fontSize: 14),
                             ),
                             const SizedBox(height: 15),
@@ -285,12 +296,16 @@ class PaymentPage extends StatelessWidget {
                               onPressed: _pickFile,
                               icon: const Icon(
                                 Icons.upload_file,
-                                color: Color(0xFF1A424B),
+                                color: Color(
+                                  0xFF1A424B,
+                                ), // Ganti dengan warna yang diinginkan
                               ),
                               label: const Text(
                                 'Upload File',
                                 style: TextStyle(
-                                  color: Color(0xFF1A424B),
+                                  color: Color(
+                                    0xFF1A424B,
+                                  ), // Ganti dengan warna yang diinginkan
                                 ),
                               ),
                             ),
@@ -302,9 +317,7 @@ class PaymentPage extends StatelessWidget {
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 10,
-                    ),
+                        horizontal: 10, vertical: 10),
                     child: SizedBox(
                       width: double.infinity,
                       height: 40,
@@ -314,8 +327,8 @@ class PaymentPage extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1A424B),
-                          minimumSize: Size(
-                            MediaQuery.of(context).size.width,
+                          minimumSize: const Size(
+                            double.infinity,
                             0,
                           ),
                         ),

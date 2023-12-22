@@ -106,7 +106,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                   child: ElevatedButton(
                     onPressed: selectedPaymentOption != 0
                         ? () async {
-                            await saveDataToFirestore(
+                            String orderId = await saveDataToFirestore(
                               widget.jenisBillboard,
                               selectedPaymentOption,
                             );
@@ -115,6 +115,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => PaymentPage(
+                                  orderId: orderId,
                                   jenisBillboard: widget.jenisBillboard,
                                   selectedPaymentOption: selectedPaymentOption,
                                   orderPrice: 'Rp.200.000',
@@ -174,21 +175,25 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
     );
   }
 
-  Future<void> saveDataToFirestore(
+  Future<String> saveDataToFirestore(
     String jenisBillboard,
     int selectedPaymentOption,
   ) async {
     try {
       CollectionReference orders = _firestore.collection('orders');
-      await orders.add({
+      DocumentReference result = await orders.add({
         'jenisBillboard': jenisBillboard,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
+        'status': 'PENDING',
         'timestamp': FieldValue.serverTimestamp(),
       });
+
+      return result.id; // return the orderId
     } catch (e) {
       print('Error saving data to Firestore: $e');
       // Handle the error as needed
+      return ''; // or throw an exception
     }
   }
 }

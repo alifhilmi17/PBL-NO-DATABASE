@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:pubblicita/cart/keranjang_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+class Order {
+  final String orderCode;
+  final String jenisBanner;
+  final int selectedPaymentOption;
+  final String orderPrice;
+
+  Order({
+    required this.orderCode,
+    required this.jenisBanner,
+    required this.selectedPaymentOption,
+    required this.orderPrice,
+  });
+}
+
 class PaymentPage extends StatelessWidget {
   final String jenisBanner;
   final int selectedPaymentOption;
   final String orderPrice;
-  final String orderCode;
+  final String orderId;
 
   PaymentPage({
+    Key? key,
     required this.jenisBanner,
     required this.selectedPaymentOption,
     required this.orderPrice,
-  }) : orderCode = generateOrderCode(jenisBanner);
-
-  static String generateOrderCode(String jenisBanner) {
-    return 'BNR_${jenisBanner}_${DateFormat('yyyyMMdd_HHmmss').format(DateTime.now())}';
-  }
+    required this.orderId,
+  });
 
   Future<Map<String, dynamic>> _fetchUserData() async {
     try {
@@ -32,18 +43,14 @@ class PaymentPage extends StatelessWidget {
                 .doc(user.uid)
                 .get();
 
-        if (snapshot.exists) {
-          Map<String, dynamic> userData = snapshot.data() ?? {};
-          return userData;
-        } else {
-          print('User document not found or lacks necessary fields.');
-          return {};
-        }
+        return snapshot.data() ?? {};
       } else {
+        // Handle the case where the user is not logged in
         return {};
       }
     } catch (e) {
       print('Error fetching user data: $e');
+      // Handle the error as needed
       return {};
     }
   }
@@ -69,9 +76,12 @@ class PaymentPage extends StatelessWidget {
       BuildContext context) async {
     try {
       await savePaymentDataToFirestore();
+
       _showSuccessMessage(context);
     } catch (e) {
       print('Error saving payment data: $e');
+      // Handle the error as needed
+      // Show an error message to the user
     }
   }
 
@@ -80,10 +90,11 @@ class PaymentPage extends StatelessWidget {
         FirebaseFirestore.instance.collection('payments');
 
     await payments.add({
-      'orderCode': orderCode,
+      'orderId': orderId,
       'jenisBanner': jenisBanner,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
+      'status': 'PENDING',
       'timestamp': FieldValue.serverTimestamp(),
     });
   }
@@ -127,9 +138,9 @@ class PaymentPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Nama Pembeli: ${userData['displayName'] ?? 'John Doe'}\n'
-                'Email: ${userData['email'] ?? 'john@example.com'}\n'
-                'Nomor Telepon: ${userData['phoneNumber'] ?? '+1 123-456-7890'}',
+                'Nama Pembeli: ${userData['displayName'] ?? ''}\n'
+                'Email: ${userData['email'] ?? ''}\n'
+                'Nomor Telepon: ${userData['phoneNumber'] ?? ''}',
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -194,7 +205,7 @@ class PaymentPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            orderCode,
+                            orderId,
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -209,30 +220,29 @@ class PaymentPage extends StatelessWidget {
                     style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
                   ),
                   _buildUserDataCard(userData),
-                  SizedBox(
-                    width: 500,
-                    child: Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      color: const Color(0xB21B424C),
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nama Penjual: Seller Name\n'
-                              'Email: Seller@example.com\n'
-                              'Nomor Telepon: +1 123-456-7890',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            )
-                          ],
-                        ),
+                  // Added another call for consistency
+
+                  Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    color: const Color(0xB21B424C), // Warna latar belakang card
+                    child: const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Nama Penjual: Seller Name\n'
+                            'Email: Seller@example.com\n'
+                            'Nomor Telepon: +1 123-456-7890',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -278,7 +288,7 @@ class PaymentPage extends StatelessWidget {
                             ),
                             const SizedBox(height: 15),
                             const Text(
-                              'Dimohon setelah melakukan pembayaran,\ndapat menambahkan screenshoot layar untuk verifikasi',
+                              'Dimohon setelah melakukan pembayaran,\ndapat menambahkan screenshot layar untuk verifikasi',
                               style: TextStyle(fontSize: 14),
                             ),
                             const SizedBox(height: 15),
@@ -286,12 +296,16 @@ class PaymentPage extends StatelessWidget {
                               onPressed: _pickFile,
                               icon: const Icon(
                                 Icons.upload_file,
-                                color: Color(0xFF1A424B),
+                                color: Color(
+                                  0xFF1A424B,
+                                ), // Ganti dengan warna yang diinginkan
                               ),
                               label: const Text(
                                 'Upload File',
                                 style: TextStyle(
-                                  color: Color(0xFF1A424B),
+                                  color: Color(
+                                    0xFF1A424B,
+                                  ), // Ganti dengan warna yang diinginkan
                                 ),
                               ),
                             ),
@@ -313,8 +327,8 @@ class PaymentPage extends StatelessWidget {
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF1A424B),
-                          minimumSize: Size(
-                            MediaQuery.of(context).size.width,
+                          minimumSize: const Size(
+                            double.infinity,
                             0,
                           ),
                         ),

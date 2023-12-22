@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:pubblicita/cart/keranjang_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pubblicita/cart/keranjang_page.dart';
 
 class Order {
   final String orderCode;
@@ -23,18 +22,15 @@ class PaymentPage extends StatelessWidget {
   final String jenisBillboard;
   final int selectedPaymentOption;
   final String orderPrice;
-  final String orderCode;
+  final String orderId;
 
   PaymentPage({
     Key? key,
     required this.jenisBillboard,
     required this.selectedPaymentOption,
     required this.orderPrice,
-  }) : orderCode = generateOrderCode(jenisBillboard);
-
-  static String generateOrderCode(String jenisBillboard) {
-    return 'BLB_${jenisBillboard}_${DateFormat('yyyyMMdd_HHmmss').format(DateTime.now())}';
-  }
+    required this.orderId,
+  });
 
   Future<Map<String, dynamic>> _fetchUserData() async {
     try {
@@ -94,10 +90,11 @@ class PaymentPage extends StatelessWidget {
         FirebaseFirestore.instance.collection('payments');
 
     await payments.add({
-      'orderCode': orderCode,
+      'orderId': orderId,
       'jenisBillboard': jenisBillboard,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
+      'status': 'PENDING',
       'timestamp': FieldValue.serverTimestamp(),
     });
   }
@@ -109,7 +106,7 @@ class PaymentPage extends StatelessWidget {
         return AlertDialog(
           title: const Text('Pemesanan Berhasil'),
           content: const Text(
-              'Terima kasih! Atas Pemesanannya Harap Meelakukan Pembayaran.'),
+              'Terima kasih! Atas Pemesanannya Harap Melakukan Pembayaran.'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -141,9 +138,9 @@ class PaymentPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Nama Pembeli: ${userData['displayName'] ?? 'John Doe'}\n'
-                'Email: ${userData['email'] ?? 'john@example.com'}\n'
-                'Nomor Telepon: ${userData['phoneNumber'] ?? '+1 123-456-7890'}',
+                'Nama Pembeli: ${userData['displayName'] ?? ''}\n'
+                'Email: ${userData['email'] ?? ''}\n'
+                'Nomor Telepon: ${userData['phoneNumber'] ?? ''}',
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -208,7 +205,7 @@ class PaymentPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            orderCode,
+                            orderId,
                             style: const TextStyle(
                               fontSize: 16,
                               color: Colors.black,
@@ -312,8 +309,7 @@ class PaymentPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ], // Implement your file upload logic here
-                          // You can use packages like file_picker to facilitate file selection
+                          ],
                         ),
                       ],
                     ),

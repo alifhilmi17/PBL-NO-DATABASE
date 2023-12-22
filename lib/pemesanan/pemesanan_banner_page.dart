@@ -80,15 +80,15 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                                 widget.catalogContent,
                                 style: const TextStyle(fontSize: 16),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 10),
                               const Text(
                                 'Pembayaran:',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: 15),
                               ),
                               buildPaymentOptionRadio(1, 'Pembayaran Didepan'),
                               const Text(
                                 'Pembayaran Melalui Bank:',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: 15),
                               ),
                               buildPaymentOptionRadio(2, 'Mandiri \n10900'),
                               buildPaymentOptionRadio(3, 'BTN \n140'),
@@ -106,7 +106,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                   child: ElevatedButton(
                     onPressed: selectedPaymentOption != 0
                         ? () async {
-                            await saveDataToFirestore(
+                            String orderId = await saveDataToFirestore(
                               widget.jenisBanner,
                               selectedPaymentOption,
                             );
@@ -115,6 +115,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => PaymentPage(
+                                  orderId: orderId,
                                   jenisBanner: widget.jenisBanner,
                                   selectedPaymentOption: selectedPaymentOption,
                                   orderPrice: 'Rp.200.000',
@@ -174,21 +175,25 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
     );
   }
 
-  Future<void> saveDataToFirestore(
+  Future<String> saveDataToFirestore(
     String jenisBanner,
     int selectedPaymentOption,
   ) async {
     try {
       CollectionReference orders = _firestore.collection('orders');
-      await orders.add({
+      DocumentReference result = await orders.add({
         'jenisBanner': jenisBanner,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
+        'status': 'PENDING',
         'timestamp': FieldValue.serverTimestamp(),
       });
+
+      return result.id; // return the orderId
     } catch (e) {
       print('Error saving data to Firestore: $e');
       // Handle the error as needed
+      return ''; // or throw an exception
     }
   }
 }
