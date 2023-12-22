@@ -79,7 +79,10 @@ class PaymentPage extends StatelessWidget {
   Future<void> _savePaymentDataAndShowSuccessMessage(
       BuildContext context) async {
     try {
-      await savePaymentDataToFirestore();
+      DocumentReference orderDocRef =
+          FirebaseFirestore.instance.collection('orders').doc();
+
+      await savePaymentDataToFirestore(orderDocRef);
 
       _showSuccessMessage(context);
     } catch (e) {
@@ -89,16 +92,26 @@ class PaymentPage extends StatelessWidget {
     }
   }
 
-  Future<void> savePaymentDataToFirestore() async {
+  Future<void> savePaymentDataToFirestore(DocumentReference orderDocRef) async {
     CollectionReference payments =
         FirebaseFirestore.instance.collection('payments');
 
+    // Use the same orderId for both "orders" and "payments"
+    String orderId = orderDocRef.id;
+
     await payments.add({
+      'orderId': orderId,
       'orderCode': orderCode,
       'jenisBillboard': jenisBillboard,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
       'timestamp': FieldValue.serverTimestamp(),
+    });
+
+    // Update the "orders" collection with the same orderId
+    await FirebaseFirestore.instance.collection('orders').doc(orderId).set({
+      'orderId': orderId,
+      // Add other fields if needed
     });
   }
 
