@@ -21,7 +21,6 @@ class PemesananBillboardPage extends StatefulWidget {
 class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
   int selectedPaymentOption = 0;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  late DocumentReference orderDocRef;
 
   @override
   Widget build(BuildContext context) {
@@ -181,16 +180,10 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
   ) async {
     try {
       CollectionReference orders = _firestore.collection('orders');
-
-      // Initialize orderDocRef
-      orderDocRef = orders.doc();
-
-      await orderDocRef.set({
-        'orderId': orderDocRef.id,
+      await orders.add({
         'jenisBillboard': jenisBillboard,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
-        'status': 'PENDING',
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
