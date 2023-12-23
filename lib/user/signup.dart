@@ -123,6 +123,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 40),
                   const Text(
                     "Buat Akun Anda",
                     style: TextStyle(
@@ -132,12 +133,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       color: Color(0xff0D0140),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 20),
                       buildTextField(
                           "Full Name", fullNameController, "Nama Lengkap Anda"),
                       const SizedBox(height: 15),

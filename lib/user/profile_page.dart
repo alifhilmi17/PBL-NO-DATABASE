@@ -167,13 +167,16 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: ElevatedButton(
           onPressed: _saveChanges,
-          backgroundColor: const Color(0xFF143E47),
+          style: ElevatedButton.styleFrom(
+            primary: const Color(
+                0xFF143E47), // Change the color to your preferred color
+          ),
           child: Text(
             'Save',
             style: TextStyle(
-              color: Colors.white, // Warna teks diatur menjadi putih di sini
+              color: Colors.white,
             ),
           ),
         ),
@@ -183,12 +186,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildUserProfileCard(String fullName) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           Card(
             elevation: 10,
             margin: const EdgeInsets.all(0),
@@ -200,7 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
               alignment: Alignment.topRight,
               children: [
                 Container(
-                  height: 150.0,
+                  height: 130.0,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
@@ -287,7 +290,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: ListTile(
               title: Container(
                 padding: const EdgeInsets.all(
-                    10), // Increase the padding for the text field
+                    5), // Increase the padding for the text field
                 child: TextField(
                   controller: controller,
                   onChanged: (text) {
