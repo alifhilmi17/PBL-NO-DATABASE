@@ -29,6 +29,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   late Stream<QuerySnapshot<Map<String, dynamic>>> _paymentStream;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> _ordersStream;
   int _selectedIndex = 1; // Default selected index for CartPage
   User? _currentUser;
 
@@ -38,6 +39,7 @@ class _CartPageState extends State<CartPage> {
     _currentUser = FirebaseAuth.instance.currentUser;
     _paymentStream =
         FirebaseFirestore.instance.collection('payments').snapshots();
+    _ordersStream = FirebaseFirestore.instance.collection('orders').snapshots();
   }
 
   Future<DocumentSnapshot> getUserData() async {
@@ -139,50 +141,71 @@ class _CartPageState extends State<CartPage> {
                   const SizedBox(height: 16),
                   StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                     stream: _paymentStream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
+                    builder: (context, paymentSnapshot) {
+                      if (paymentSnapshot.hasError) {
                         return Text(
-                            'Error loading payments: ${snapshot.error}');
+                            'Error loading payments: ${paymentSnapshot.error}');
                       }
 
-                      if (snapshot.connectionState == ConnectionState.waiting) {
+                      if (paymentSnapshot.connectionState ==
+                          ConnectionState.waiting) {
                         return CircularProgressIndicator();
                       }
 
                       List<QueryDocumentSnapshot<Map<String, dynamic>>>
-                          payments = snapshot.data!.docs;
+                          payments = paymentSnapshot.data!.docs;
 
-                      return Expanded(
-                        child: ListView.builder(
-                          itemCount: payments.length,
-                          itemBuilder: (context, index) {
-                            var paymentData = payments[index].data();
+                      return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                        stream: _ordersStream,
+                        builder: (context, orderSnapshot) {
+                          if (orderSnapshot.hasError) {
+                            return Text(
+                                'Error loading orders: ${orderSnapshot.error}');
+                          }
 
-                            return Card(
-                              child: ListTile(
-                                title: Text(
-                                    'Order Code: ${paymentData['orderId']}'),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        'Billboard: ${paymentData['jenisBillboard']}'),
-                                    Text(
-                                        'Banner: ${paymentData['jenisBanner']}'),
-                                    Text(
-                                        'Kendaraan: ${paymentData['jenisKendaraan']}'),
-                                    SizedBox(height: 10),
-                                    Text(
-                                        'Status Pembayaran: ${paymentData['status']}'),
-                                    Text(
-                                        'Status Pengerjaan: ${paymentData['']}'),
-                                    // Add more fields as needed
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                          if (orderSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          }
+
+                          List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                              orders = orderSnapshot.data!.docs;
+
+                          return Expanded(
+                            child: ListView.builder(
+                              itemCount: payments.length,
+                              itemBuilder: (context, index) {
+                                var paymentData = payments[index].data();
+                                var orderData = orders[index].data();
+
+                                return Card(
+                                  child: ListTile(
+                                    title: Text(
+                                        'Order Code: ${paymentData['orderId']}'),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            'Billboard: ${paymentData['jenisBillboard']}'),
+                                        Text(
+                                            'Banner: ${paymentData['jenisBanner']}'),
+                                        Text(
+                                            'Kendaraan: ${paymentData['jenisKendaraan']}'),
+                                        SizedBox(height: 10),
+                                        Text(
+                                            'Status Pembayaran: ${paymentData['status']}'),
+                                        Text(
+                                            'Status Pengerjaan: ${orderData['status']}'),
+                                        // Add more fields as needed
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
