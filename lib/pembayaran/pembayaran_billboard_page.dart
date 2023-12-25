@@ -94,7 +94,7 @@ class PaymentPage extends StatelessWidget {
       'jenisBillboard': jenisBillboard,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
-      'status': 'PENDING',
+      'payments_status': 'PENDING',
       'timestamp': FieldValue.serverTimestamp(),
     });
   }

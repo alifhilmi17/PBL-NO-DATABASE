@@ -185,7 +185,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
         'jenisBillboard': jenisBillboard,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
-        'status': 'PENDING',
+        'orders_status': 'ON GOING',
         'timestamp': FieldValue.serverTimestamp(),
       });
 
