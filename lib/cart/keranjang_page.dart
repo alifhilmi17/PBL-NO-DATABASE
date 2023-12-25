@@ -173,7 +173,7 @@ class _CartPageState extends State<CartPage> {
                                         'Kendaraan: ${paymentData['jenisKendaraan']}'),
                                     SizedBox(height: 10),
                                     Text(
-                                        'Status Pembayaran: ${paymentData['payments_status']}'),
+                                        'Status Pembayaran: ${paymentData['status']}'),
                                     Text(
                                         'Status Pengerjaan: ${paymentData['']}'),
                                     // Add more fields as needed
