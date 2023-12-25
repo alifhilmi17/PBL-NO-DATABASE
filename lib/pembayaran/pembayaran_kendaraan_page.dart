@@ -94,7 +94,7 @@ class PaymentPage extends StatelessWidget {
       'jenisKendaraan': jenisKendaraan,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
-      'status': 'PENDING',
+      'payments_status': 'PENDING',
       'timestamp': FieldValue.serverTimestamp(),
     });
   }

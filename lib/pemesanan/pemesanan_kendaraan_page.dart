@@ -177,16 +177,16 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
   }
 
   Future<String> saveDataToFirestore(
-    String jenisKendaraan,
+    String jenisBillboard,
     int selectedPaymentOption,
   ) async {
     try {
       CollectionReference orders = _firestore.collection('orders');
       DocumentReference result = await orders.add({
-        'jenisKendaraan': jenisKendaraan,
+        'jenisBillboard': jenisBillboard,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
-        'status': 'PENDING',
+        'orders_status': 'ON GOING',
         'timestamp': FieldValue.serverTimestamp(),
       });
 
