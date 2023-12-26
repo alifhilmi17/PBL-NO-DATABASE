@@ -4,21 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pubblicita/cart/keranjang_page.dart';
 
-class Order {
-  final String orderCode;
-  final String jenisBillboard;
-  final int selectedPaymentOption;
-  final String orderPrice;
-
-  Order({
-    required this.orderCode,
-    required this.jenisBillboard,
-    required this.selectedPaymentOption,
-    required this.orderPrice,
-  });
-}
-
-class PaymentPage extends StatelessWidget {
+class PaymentPage extends StatefulWidget {
   final String jenisBillboard;
   final int selectedPaymentOption;
   final String orderPrice;
@@ -30,7 +16,14 @@ class PaymentPage extends StatelessWidget {
     required this.selectedPaymentOption,
     required this.orderPrice,
     required this.orderId,
-  });
+  }) : super(key: key);
+
+  @override
+  _PaymentPageState createState() => _PaymentPageState();
+}
+
+class _PaymentPageState extends State<PaymentPage> {
+  PlatformFile? _uploadedFile;
 
   Future<Map<String, dynamic>> _fetchUserData() async {
     try {
@@ -60,10 +53,11 @@ class PaymentPage extends StatelessWidget {
       FilePickerResult? result = await FilePicker.platform.pickFiles();
 
       if (result != null) {
-        PlatformFile file = result.files.first;
-        print('File path: ${file.path}');
-        print('File name: ${file.name}');
-        // Handle the selected file
+        setState(() {
+          _uploadedFile = result.files.first;
+          print('File path: ${_uploadedFile!.path}');
+          print('File name: ${_uploadedFile!.name}');
+        });
       } else {
         // User canceled the file picking
       }
@@ -90,10 +84,10 @@ class PaymentPage extends StatelessWidget {
         FirebaseFirestore.instance.collection('payments');
 
     await payments.add({
-      'orderId': orderId,
-      'jenisBillboard': jenisBillboard,
-      'selectedPaymentOption': selectedPaymentOption,
-      'orderPrice': orderPrice,
+      'orderId': widget.orderId,
+      'jenisBillboard': widget.jenisBillboard,
+      'selectedPaymentOption': widget.selectedPaymentOption,
+      'orderPrice': widget.orderPrice,
       'status': 'PENDING',
       'timestamp': FieldValue.serverTimestamp(),
     });
@@ -143,7 +137,7 @@ class PaymentPage extends StatelessWidget {
               ),
             ),
             Text(
-              orderId,
+              widget.orderId,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black,
@@ -169,7 +163,7 @@ class PaymentPage extends StatelessWidget {
             ),
           ),
           Text(
-            orderPrice,
+            widget.orderPrice,
             style: const TextStyle(
               fontSize: 16,
               color: Colors.red,

@@ -176,13 +176,13 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
   }
 
   Future<String> saveDataToFirestore(
-    String jenisBillboard,
+    String jenisBanner,
     int selectedPaymentOption,
   ) async {
     try {
       CollectionReference orders = _firestore.collection('orders');
       DocumentReference result = await orders.add({
-        'jenisBillboard': jenisBillboard,
+        'jenisBanner': jenisBanner,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
         'status': 'PENDING',
