@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.1.0
   google_nav_bar: ^5.0.6
   intl: ^0.18.1
+  image_picker: ^1.0.4
   multi_dropdown: ^2.1.1
   sliver_app_bar_builder: ^1.1.0
   toggle_switch: ^2.1.0
