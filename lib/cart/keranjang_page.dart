@@ -186,12 +186,8 @@ class _CartPageState extends State<CartPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                            'Billboard: ${paymentData['jenisBillboard']}'),
-                                        Text(
-                                            'Banner: ${paymentData['jenisBanner']}'),
-                                        Text(
-                                            'Kendaraan: ${paymentData['jenisKendaraan']}'),
+                                        Text('Jenis: ${paymentData['jenis']}'),
+
                                         SizedBox(height: 10),
                                         Text(
                                             'Status Pemesanan: ${orderData['status']}'),
