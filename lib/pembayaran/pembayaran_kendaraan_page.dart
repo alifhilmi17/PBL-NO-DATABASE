@@ -92,7 +92,7 @@ class PaymentPage extends StatelessWidget {
 
     await payments.add({
       'orderId': orderId,
-      'jenisKendaraan': jenisKendaraan,
+      'jenis': jenisKendaraan,
       'selectedPaymentOption': selectedPaymentOption,
       'orderPrice': orderPrice,
       'status': 'PENDING',

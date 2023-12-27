@@ -85,7 +85,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
     await payments.add({
       'orderId': widget.orderId,
-      'jenisBillboard': widget.jenisBillboard,
+      'jenis': widget.jenisBillboard,
       'selectedPaymentOption': widget.selectedPaymentOption,
       'orderPrice': widget.orderPrice,
       'status': 'PENDING',

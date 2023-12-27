@@ -182,7 +182,7 @@ class _PemesananBannerPageState extends State<PemesananBannerPage> {
     try {
       CollectionReference orders = _firestore.collection('orders');
       DocumentReference result = await orders.add({
-        'jenisBanner': jenisBanner,
+        'jenis': jenisBanner,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
         'status': 'PENDING',

@@ -183,7 +183,7 @@ class _PemesananKendaraanPageState extends State<PemesananKendaraanPage> {
     try {
       CollectionReference orders = _firestore.collection('orders');
       DocumentReference result = await orders.add({
-        'jenisKendaraan': jenisKendaraan,
+        'jenis': jenisKendaraan,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
         'status': 'PENDING',

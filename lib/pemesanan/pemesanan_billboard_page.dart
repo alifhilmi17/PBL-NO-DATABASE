@@ -182,7 +182,7 @@ class _PemesananBillboardPageState extends State<PemesananBillboardPage> {
     try {
       CollectionReference orders = _firestore.collection('orders');
       DocumentReference result = await orders.add({
-        'jenisBillboard': jenisBillboard,
+        'jenis': jenisBillboard,
         'selectedPaymentOption': selectedPaymentOption,
         'orderPrice': 'Rp.200.000',
         'status': 'PENDING',
